@@ -13,11 +13,6 @@
             fillBoardAtGameInit();
         }
 
-        public ePlayerSymbol GetCell(int i_Row, int i_Col)
-        {
-            return m_Board[i_Row, i_Col];
-        }
-
         public int BoardSize
         {
             get
@@ -26,15 +21,44 @@
             }
         }
 
-        private void fillBoardAtGameInit()
+        public ePlayerSymbol GetCell(int i_Row, int i_Col)
         {
-            for (int i = 0; i < m_BoardSize; i++)
+            return m_Board[i_Row, i_Col];
+        }
+
+        public void PlaceSymbol(int i_Row, int i_Col, ePlayerSymbol i_Symbol)
+        {
+            bool isRequestedCellValid = IsCellEmpty(i_Row, i_Col); // and input is in borders
+
+            if (isRequestedCellValid)
             {
-                for (int j = 0; j < m_BoardSize; j++)
+                m_Board[i_Row, i_Col] = i_Symbol;
+            }
+        }
+
+        public bool IsCellEmpty(int i_Row, int i_Col)
+        {
+            bool isRequestedCellEmpty = (m_Board[i_Row, i_Col] == ePlayerSymbol.None);
+
+            return isRequestedCellEmpty;
+        }
+
+        public bool IsBoardFull()
+        {
+            bool isBoardFull = true;
+
+            for (int i = 0; i < m_BoardSize && isBoardFull; i++)
+            {
+                for (int j = 0; j < m_BoardSize && isBoardFull; j++)
                 {
-                    m_Board[i, j] = ePlayerSymbol.None;
+                    if (m_Board[i, j] == ePlayerSymbol.None)
+                    {
+                        isBoardFull = false;
+                    }
                 }
             }
+
+            return isBoardFull;
         }
 
         public bool CheckLosingCondition()
@@ -47,6 +71,17 @@
                                     checkSecondaryDiagonalForLosingCondition());
 
             return isLosingConditionMet;
+        }
+
+        private void fillBoardAtGameInit()
+        {
+            for (int i = 0; i < m_BoardSize; i++)
+            {
+                for (int j = 0; j < m_BoardSize; j++)
+                {
+                    m_Board[i, j] = ePlayerSymbol.None;
+                }
+            }
         }
 
         private bool checkRowsForLosingCondition()
@@ -125,41 +160,6 @@
             }
 
             return isDiagonalLosing;
-        }
-
-        public void PlaceSymbol(int i_Row, int i_Col, ePlayerSymbol i_Symbol)
-        {
-            bool isRequestedCellValid = IsCellEmpty(i_Row, i_Col); // and input is in borders
-
-            if (isRequestedCellValid)
-            {
-                m_Board[i_Row, i_Col] = i_Symbol;
-            }
-        }
-
-        public bool IsCellEmpty(int i_Row, int i_Col)
-        {
-            bool isRequestedCellEmpty = (m_Board[i_Row, i_Col] == ePlayerSymbol.None);
-
-            return isRequestedCellEmpty;
-        }
-
-        public bool IsBoardFull()
-        {
-            bool isBoardFull = true;
-
-            for (int i = 0; i < m_BoardSize && isBoardFull; i++)
-            {
-                for (int j = 0; j < m_BoardSize && isBoardFull; j++)
-                {
-                    if (m_Board[i, j] == ePlayerSymbol.None)
-                    {
-                        isBoardFull = false;
-                    }
-                }
-            }
-
-            return isBoardFull;
         }
     }
 }
