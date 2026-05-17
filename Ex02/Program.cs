@@ -10,7 +10,7 @@ namespace Ex02
     {
         static void Main()
         {
-
+            
         }
     }
 }
