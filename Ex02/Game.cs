@@ -16,5 +16,25 @@
             m_CurrentPlayerIndex = i_StartingPlayerIndex;
             m_GameState = eGameState.InProgress;
         }
+
+        public eGameState MakeMoveAndUpdateResult(int i_RequestedRow, int i_RequestedColumn, Player i_PlayingPlayer)
+        {
+            if (m_Board.IsCellEmpty(i_RequestedRow,i_RequestedColumn)) //need to add border check
+            {
+                m_Board.PlaceSymbol(i_RequestedRow, i_RequestedColumn, i_PlayingPlayer.Symbol);
+
+                if (m_Board.CheckLosingCondition())
+                {
+                    m_GameState = eGameState.Winner;
+
+                }
+                else if (m_Board.IsBoardFull())
+                {
+                    m_GameState = eGameState.Draw;
+                }
+            }
+
+            return m_GameState;
+        }
     }
 }
