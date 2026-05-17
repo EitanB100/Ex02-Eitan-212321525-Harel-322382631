@@ -44,7 +44,7 @@
 
         public eGameState MakeMoveAndUpdateResult(int i_RequestedRow, int i_RequestedColumn)
         {
-            if (m_Board.IsCellEmpty(i_RequestedRow,i_RequestedColumn)) //need to add border check
+            if (m_Board.IsValidCellForWriting(i_RequestedRow, i_RequestedColumn)) 
             {
                 m_Board.PlaceSymbol(i_RequestedRow, i_RequestedColumn, m_Players[m_CurrentPlayerIndex].Symbol);
 

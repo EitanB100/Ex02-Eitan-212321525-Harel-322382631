@@ -28,12 +28,23 @@
 
         public void PlaceSymbol(int i_Row, int i_Col, ePlayerSymbol i_Symbol)
         {
-            bool isRequestedCellValid = IsCellEmpty(i_Row, i_Col); // and input is in borders
+            bool isRequestedCellValid = IsValidCellForWriting(i_Row, i_Col); // and input is in borders
 
             if (isRequestedCellValid)
             {
                 m_Board[i_Row, i_Col] = i_Symbol;
             }
+        }
+
+        public bool IsValidCellForWriting(int i_RequestedRow, int i_RequestedColumn)
+        {
+            bool isValidCoordinate = (i_RequestedColumn < BoardSize
+                && i_RequestedColumn >= 0
+                && i_RequestedRow < BoardSize
+                && i_RequestedRow >= 0
+                && IsCellEmpty(i_RequestedRow, i_RequestedColumn));
+
+            return isValidCoordinate;
         }
 
         public bool IsCellEmpty(int i_Row, int i_Col)
