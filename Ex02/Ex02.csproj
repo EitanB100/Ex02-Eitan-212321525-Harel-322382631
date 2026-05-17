@@ -41,6 +41,7 @@
     <Compile Include="ePlayerSymbol.cs" />
     <Compile Include="GameBoard.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Program.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

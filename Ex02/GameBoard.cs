@@ -16,8 +16,8 @@
         public int BoardSize
         {
             get
-            {
-                return m_BoardSize;
+            { 
+                return m_BoardSize
             }
         }
 
@@ -73,7 +73,7 @@
             {
                 bool isCurrentColumnLosingColumn = true;
                 ePlayerSymbol firstSymbolInCurrentColumn = m_Board[0, i];
-
+                
                 for (int j = 0; j < m_BoardSize && isCurrentColumnLosingColumn; j++)
                 {
                     isCurrentColumnLosingColumn = !((m_Board[j, i] == ePlayerSymbol.None)
