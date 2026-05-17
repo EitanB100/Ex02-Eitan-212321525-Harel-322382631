@@ -89,7 +89,7 @@
 
                 for (int i = 1; i < m_BoardSize && isDiagonalLosing; i++)
                 {
-                    isDiagonalLosing = (firstDiagonalSymbol == m_Board[i, i]);
+                    isDiagonalLosing = (isDiagonalLosing) && (firstDiagonalSymbol == m_Board[i, i]);
                 }
             }
 
@@ -99,7 +99,7 @@
         private bool checkSecondaryDiagonalForLosingCondition()
         {
             bool isDiagonalLosing = false;
-            ePlayerSymbol firstDiagonalSymbol = m_Board[m_BoardSize - 1, 0];
+            ePlayerSymbol firstDiagonalSymbol = m_Board[0, m_BoardSize - 1];
 
             if (firstDiagonalSymbol != ePlayerSymbol.None)
             {
@@ -107,7 +107,7 @@
 
                 for (int i = 1; i < m_BoardSize; i++)
                 {
-                    isDiagonalLosing = (firstDiagonalSymbol == m_Board[i, m_BoardSize - i - 1]);
+                    isDiagonalLosing = (isDiagonalLosing) && (firstDiagonalSymbol == m_Board[i, m_BoardSize - i - 1]);
                 }
             }
 
