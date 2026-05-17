@@ -72,6 +72,12 @@
             m_Board = new GameBoard(m_Board.BoardSize);
         }
 
+        //if pressed Q
+        public void QuitCurrentGame()
+        {
+            m_GameState = eGameState.Quit;
+        }
+
         private void switchTurn()
         {
             m_CurrentPlayerIndex = 1 - m_CurrentPlayerIndex;
