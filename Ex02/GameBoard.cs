@@ -13,6 +13,14 @@
             fillBoardAtGameInit();
         }
 
+        public int BoardSize
+        {
+            get
+            {
+                return m_BoardSize;
+            }
+        }
+
         private void fillBoardAtGameInit()
         {
             for (int i = 0; i < m_BoardSize; i++)
@@ -91,7 +99,7 @@
                 {
                     isDiagonalLosing = (firstDiagonalSymbol == m_Board[i, i]);
                 }
-            } 
+            }
 
             return isDiagonalLosing;
         }
