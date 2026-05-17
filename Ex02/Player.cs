@@ -2,10 +2,10 @@
 {
     public class Player
     {
-        private string m_Name = string.Empty;
-        private ePlayerSymbol m_Symbol = ePlayerSymbol.None;
+        private readonly string m_Name = string.Empty;
+        private readonly ePlayerSymbol m_Symbol = ePlayerSymbol.None;
+        private readonly bool m_IsCPU = false;
         private int m_Score = 0;
-        private bool m_IsCPU = false;
 
         public Player(string i_Name, ePlayerSymbol i_Symbol, bool i_IsCPU)
         {
@@ -36,10 +36,7 @@
             {
                 return m_Score;
             }
-            set
-            {
-                m_Score++;
-            }
+           
         }
         
         public bool IsCPU
@@ -48,11 +45,11 @@
             {
                 return m_IsCPU;
             }
-            set
-            {
-                m_IsCPU = value;
-            }
         }
 
+        public void AddPoint()
+        {
+            m_Score++;
+        }
     }
 }
