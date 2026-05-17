@@ -28,15 +28,15 @@
         {
             bool isLosingConditionMet = false;
 
-            isLosingConditionMet = (CheckRowsForLosingCondition() ||
-                                    CheckColumnsForLosingCondition() ||
-                                    CheckMainDiagonalForLosingCondition() ||
-                                    CheckSecondaryDiagonalForLosingCondition());
+            isLosingConditionMet = (checkRowsForLosingCondition() ||
+                                    checkColumnsForLosingCondition() ||
+                                    checkMainDiagonalForLosingCondition() ||
+                                    checkSecondaryDiagonalForLosingCondition());
 
             return isLosingConditionMet;
         }
 
-        private bool CheckRowsForLosingCondition()
+        private bool checkRowsForLosingCondition()
         {
             bool isLosingRowFound = false;
 
@@ -57,7 +57,7 @@
             return isLosingRowFound;
         }
 
-        private bool CheckColumnsForLosingCondition()
+        private bool checkColumnsForLosingCondition()
         {
             bool isLosingColumnFound = false;
 
@@ -69,7 +69,7 @@
                 for (int j = 0; j < m_BoardSize && isCurrentColumnLosingColumn; j++)
                 {
                     isCurrentColumnLosingColumn = !((m_Board[j, i] == ePlayerSymbol.None)
-                        || (m_Board[i, j] != firstSymbolInCurrentColumn));
+                        || (m_Board[j, i] != firstSymbolInCurrentColumn));
                 }
 
                 isLosingColumnFound = isCurrentColumnLosingColumn;
@@ -78,7 +78,7 @@
             return isLosingColumnFound;
         }
 
-        private bool CheckMainDiagonalForLosingCondition()
+        private bool checkMainDiagonalForLosingCondition()
         {
             bool isDiagonalLosing = false;
             ePlayerSymbol firstDiagonalSymbol = m_Board[0, 0];
@@ -96,18 +96,18 @@
             return isDiagonalLosing;
         }
 
-        private bool CheckSecondaryDiagonalForLosingCondition()
+        private bool checkSecondaryDiagonalForLosingCondition()
         {
             bool isDiagonalLosing = false;
-            ePlayerSymbol firstDiagonalSymbol = m_Board[0, m_BoardSize - 1];
+            ePlayerSymbol firstDiagonalSymbol = m_Board[m_BoardSize - 1, 0];
 
             if (firstDiagonalSymbol != ePlayerSymbol.None)
             {
                 isDiagonalLosing = true;
 
-                for (int i = 2; i <= m_BoardSize; i++)
+                for (int i = 1; i < m_BoardSize; i++)
                 {
-                    isDiagonalLosing = (firstDiagonalSymbol == m_Board[m_BoardSize - i, i - 1]);
+                    isDiagonalLosing = (firstDiagonalSymbol == m_Board[i, m_BoardSize - i - 1]);
                 }
             }
 
