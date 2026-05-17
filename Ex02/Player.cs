@@ -36,9 +36,9 @@
             {
                 return m_Score;
             }
-           
+
         }
-        
+
         public bool IsCPU
         {
             get

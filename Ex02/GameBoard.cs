@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex02
+﻿namespace Ex02
 {
     public class GameBoard
     {
@@ -32,19 +24,19 @@ namespace Ex02
             }
         }
 
-        public bool checkLosingCondition()
+        public bool CheckLosingCondition()
         {
             bool isLosingConditionMet = false;
 
-            isLosingConditionMet = (checkRowsForLosingCondition() ||
-                                    checkColumnsForLosingCondition() ||
-                                    checkMainDiagonalForLosingCondition() ||
-                                    checkSecondaryDiagonalForLosingCondition());
+            isLosingConditionMet = (CheckRowsForLosingCondition() ||
+                                    CheckColumnsForLosingCondition() ||
+                                    CheckMainDiagonalForLosingCondition() ||
+                                    CheckSecondaryDiagonalForLosingCondition());
 
             return isLosingConditionMet;
         }
 
-        private bool checkRowsForLosingCondition()
+        private bool CheckRowsForLosingCondition()
         {
             bool isLosingRowFound = false;
 
@@ -55,7 +47,7 @@ namespace Ex02
 
                 for (int j = 0; j < m_BoardSize && isCurrentRowLosingRow; j++)
                 {
-                    isCurrentRowLosingRow = ((m_Board[i, j] == ePlayerSymbol.None)
+                    isCurrentRowLosingRow = !((m_Board[i, j] == ePlayerSymbol.None)
                        || (m_Board[i, j] != firstSymbolInCurrentRow));
                 }
 
@@ -65,7 +57,7 @@ namespace Ex02
             return isLosingRowFound;
         }
 
-        private bool checkColumnsForLosingCondition()
+        private bool CheckColumnsForLosingCondition()
         {
             bool isLosingColumnFound = false;
 
@@ -76,7 +68,7 @@ namespace Ex02
 
                 for (int j = 0; j < m_BoardSize && isCurrentColumnLosingColumn; j++)
                 {
-                    isCurrentColumnLosingColumn = ((m_Board[j, i] == ePlayerSymbol.None)
+                    isCurrentColumnLosingColumn = !((m_Board[j, i] == ePlayerSymbol.None)
                         || (m_Board[i, j] != firstSymbolInCurrentColumn));
                 }
 
@@ -86,7 +78,7 @@ namespace Ex02
             return isLosingColumnFound;
         }
 
-        private bool checkMainDiagonalForLosingCondition()
+        private bool CheckMainDiagonalForLosingCondition()
         {
             bool isDiagonalLosing = false;
             ePlayerSymbol firstDiagonalSymbol = m_Board[0, 0];
@@ -97,22 +89,22 @@ namespace Ex02
 
                 for (int i = 1; i < m_BoardSize && isDiagonalLosing; i++)
                 {
-                    isDiagonalLosing = (firstDiagonalSymbol == m_Board[i,i]);
+                    isDiagonalLosing = (firstDiagonalSymbol == m_Board[i, i]);
                 }
             }
 
             return isDiagonalLosing;
         }
 
-        private bool checkSecondaryDiagonalForLosingCondition()
+        private bool CheckSecondaryDiagonalForLosingCondition()
         {
             bool isDiagonalLosing = false;
-            ePlayerSymbol firstDiagonalSymbol = m_Board[m_BoardSize - 1, m_BoardSize - 1];
+            ePlayerSymbol firstDiagonalSymbol = m_Board[0, m_BoardSize - 1];
 
             if (firstDiagonalSymbol != ePlayerSymbol.None)
             {
                 isDiagonalLosing = true;
-                
+
                 for (int i = 2; i <= m_BoardSize; i++)
                 {
                     isDiagonalLosing = (firstDiagonalSymbol == m_Board[m_BoardSize - i, i - 1]);
