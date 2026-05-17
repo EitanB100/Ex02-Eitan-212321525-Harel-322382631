@@ -13,6 +13,11 @@
             fillBoardAtGameInit();
         }
 
+        public ePlayerSymbol GetCell(int i_Row, int i_Col)
+        {
+            return m_Board[i_Row, i_Col];
+        }
+
         public int BoardSize
         {
             get
@@ -147,7 +152,7 @@
             {
                 for (int j = 0; j < m_BoardSize && isBoardFull; j++)
                 {
-                    if (m_Board[i,j] == ePlayerSymbol.None)
+                    if (m_Board[i, j] == ePlayerSymbol.None)
                     {
                         isBoardFull = false;
                     }
