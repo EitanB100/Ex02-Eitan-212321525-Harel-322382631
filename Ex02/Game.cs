@@ -3,7 +3,8 @@
     public class Game
     {
         private GameBoard m_Board;
-        private Player[] m_Players;
+        private const int k_AmountOfPlayersInGame = 2;
+        private Player[] m_Players = new Player[2];
         private int m_CurrentPlayerIndex;
         private eGameState m_GameState;
 
@@ -13,6 +14,7 @@
             m_Players[0] = i_Player1;
             m_Players[1] = i_Player2;
             m_CurrentPlayerIndex = i_StartingPlayerIndex;
+            m_GameState = eGameState.InProgress;
         }
     }
 }
