@@ -16,8 +16,8 @@
         public int BoardSize
         {
             get
-            { 
-                return m_BoardSize
+            {
+                return m_BoardSize;
             }
         }
 
