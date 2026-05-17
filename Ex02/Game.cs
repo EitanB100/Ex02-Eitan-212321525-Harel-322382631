@@ -17,6 +17,31 @@
             m_GameState = eGameState.InProgress;
         }
 
+        //these are for UI interaction later on
+        public Player CurrentPlayer
+        {
+            get
+            {
+                return m_Players[m_CurrentPlayerIndex];
+            }
+        }
+
+        public GameBoard Board
+        {
+            get
+            {
+                return m_Board;
+            }
+        }
+
+        public Player[] Players
+        {
+            get
+            {
+                return m_Players;
+            }
+        }
+
         public eGameState MakeMoveAndUpdateResult(int i_RequestedRow, int i_RequestedColumn)
         {
             if (m_Board.IsCellEmpty(i_RequestedRow,i_RequestedColumn)) //need to add border check
