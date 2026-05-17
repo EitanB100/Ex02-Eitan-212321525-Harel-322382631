@@ -91,7 +91,7 @@
                 {
                     isDiagonalLosing = (firstDiagonalSymbol == m_Board[i, i]);
                 }
-            }
+            } 
 
             return isDiagonalLosing;
         }
