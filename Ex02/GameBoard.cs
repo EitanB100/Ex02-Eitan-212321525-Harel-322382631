@@ -124,7 +124,7 @@
 
         public void PlaceSymbol(int i_Row, int i_Col, ePlayerSymbol i_Symbol)
         {
-            bool isRequestedCellValid = isCellEmpty(i_Row, i_Col); // and input is in borders
+            bool isRequestedCellValid = IsCellEmpty(i_Row, i_Col); // and input is in borders
 
             if (isRequestedCellValid)
             {
@@ -132,7 +132,7 @@
             }
         }
 
-        private bool isCellEmpty(int i_Row, int i_Col)
+        public bool IsCellEmpty(int i_Row, int i_Col)
         {
             bool isRequestedCellEmpty = (m_Board[i_Row, i_Col] == ePlayerSymbol.None);
 
@@ -143,9 +143,9 @@
         {
             bool isBoardFull = true;
 
-            for (int i = 0; i < m_BoardSize; i++)
+            for (int i = 0; i < m_BoardSize && isBoardFull; i++)
             {
-                for (int j = 0; j < m_BoardSize; j++)
+                for (int j = 0; j < m_BoardSize && isBoardFull; j++)
                 {
                     if (m_Board[i,j] == ePlayerSymbol.None)
                     {
