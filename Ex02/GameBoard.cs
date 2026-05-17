@@ -16,7 +16,7 @@
         public int BoardSize
         {
             get
-            { 
+            {
                 return m_BoardSize;
             }
         }
@@ -73,7 +73,7 @@
             {
                 bool isCurrentColumnLosingColumn = true;
                 ePlayerSymbol firstSymbolInCurrentColumn = m_Board[0, i];
-                
+
                 for (int j = 0; j < m_BoardSize && isCurrentColumnLosingColumn; j++)
                 {
                     isCurrentColumnLosingColumn = !((m_Board[j, i] == ePlayerSymbol.None)
@@ -120,6 +120,41 @@
             }
 
             return isDiagonalLosing;
+        }
+
+        public void PlaceSymbol(int i_Row, int i_Col, ePlayerSymbol i_Symbol)
+        {
+            bool isRequestedCellValid = isCellEmpty(i_Row, i_Col); // and input is in borders
+
+            if (isRequestedCellValid)
+            {
+                m_Board[i_Row, i_Col] = i_Symbol;
+            }
+        }
+
+        private bool isCellEmpty(int i_Row, int i_Col)
+        {
+            bool isRequestedCellEmpty = (m_Board[i_Row, i_Col] == ePlayerSymbol.None);
+
+            return isRequestedCellEmpty;
+        }
+
+        public bool IsBoardFull()
+        {
+            bool isBoardFull = true;
+
+            for (int i = 0; i < m_BoardSize; i++)
+            {
+                for (int j = 0; j < m_BoardSize; j++)
+                {
+                    if (m_Board[i,j] == ePlayerSymbol.None)
+                    {
+                        isBoardFull = false;
+                    }
+                }
+            }
+
+            return isBoardFull;
         }
     }
 }
