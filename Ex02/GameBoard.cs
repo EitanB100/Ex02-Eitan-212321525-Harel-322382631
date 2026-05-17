@@ -2,12 +2,12 @@
 {
     public class GameBoard
     {
-        private readonly int m_BoardSize = 3;
+        private readonly int r_BoardSize = 3;
         private ePlayerSymbol[,] m_Board;
 
         public GameBoard(int i_BoardSize)
         {
-            m_BoardSize = i_BoardSize;
+            r_BoardSize = i_BoardSize;
             m_Board = new ePlayerSymbol[i_BoardSize, i_BoardSize];
 
             fillBoardAtGameInit();
@@ -17,7 +17,7 @@
         {
             get
             {
-                return m_BoardSize;
+                return r_BoardSize;
             }
         }
 
@@ -28,7 +28,7 @@
 
         public void PlaceSymbol(int i_Row, int i_Col, ePlayerSymbol i_Symbol)
         {
-            bool isRequestedCellValid = IsValidCellForWriting(i_Row, i_Col); // and input is in borders
+            bool isRequestedCellValid = IsValidCellForWriting(i_Row, i_Col); 
 
             if (isRequestedCellValid)
             {
@@ -58,9 +58,9 @@
         {
             bool isBoardFull = true;
 
-            for (int i = 0; i < m_BoardSize && isBoardFull; i++)
+            for (int i = 0; i < r_BoardSize && isBoardFull; i++)
             {
-                for (int j = 0; j < m_BoardSize && isBoardFull; j++)
+                for (int j = 0; j < r_BoardSize && isBoardFull; j++)
                 {
                     if (m_Board[i, j] == ePlayerSymbol.None)
                     {
@@ -86,9 +86,9 @@
 
         private void fillBoardAtGameInit()
         {
-            for (int i = 0; i < m_BoardSize; i++)
+            for (int i = 0; i < r_BoardSize; i++)
             {
-                for (int j = 0; j < m_BoardSize; j++)
+                for (int j = 0; j < r_BoardSize; j++)
                 {
                     m_Board[i, j] = ePlayerSymbol.None;
                 }
@@ -99,12 +99,12 @@
         {
             bool isLosingRowFound = false;
 
-            for (int i = 0; i < m_BoardSize && !isLosingRowFound; i++)
+            for (int i = 0; i < r_BoardSize && !isLosingRowFound; i++)
             {
                 bool isCurrentRowLosingRow = true;
                 ePlayerSymbol firstSymbolInCurrentRow = m_Board[i, 0];
 
-                for (int j = 0; j < m_BoardSize && isCurrentRowLosingRow; j++)
+                for (int j = 0; j < r_BoardSize && isCurrentRowLosingRow; j++)
                 {
                     isCurrentRowLosingRow = !((m_Board[i, j] == ePlayerSymbol.None)
                        || (m_Board[i, j] != firstSymbolInCurrentRow));
@@ -120,12 +120,12 @@
         {
             bool isLosingColumnFound = false;
 
-            for (int i = 0; i < m_BoardSize && !isLosingColumnFound; i++)
+            for (int i = 0; i < r_BoardSize && !isLosingColumnFound; i++)
             {
                 bool isCurrentColumnLosingColumn = true;
                 ePlayerSymbol firstSymbolInCurrentColumn = m_Board[0, i];
 
-                for (int j = 0; j < m_BoardSize && isCurrentColumnLosingColumn; j++)
+                for (int j = 0; j < r_BoardSize && isCurrentColumnLosingColumn; j++)
                 {
                     isCurrentColumnLosingColumn = !((m_Board[j, i] == ePlayerSymbol.None)
                         || (m_Board[j, i] != firstSymbolInCurrentColumn));
@@ -146,7 +146,7 @@
             {
                 isDiagonalLosing = true;
 
-                for (int i = 1; i < m_BoardSize && isDiagonalLosing; i++)
+                for (int i = 1; i < r_BoardSize && isDiagonalLosing; i++)
                 {
                     isDiagonalLosing = (firstDiagonalSymbol == m_Board[i, i]);
                 }
@@ -158,15 +158,15 @@
         private bool checkSecondaryDiagonalForLosingCondition()
         {
             bool isDiagonalLosing = false;
-            ePlayerSymbol firstDiagonalSymbol = m_Board[0, m_BoardSize - 1];
+            ePlayerSymbol firstDiagonalSymbol = m_Board[0, r_BoardSize - 1];
 
             if (firstDiagonalSymbol != ePlayerSymbol.None)
             {
                 isDiagonalLosing = true;
 
-                for (int i = 1; i < m_BoardSize && isDiagonalLosing; i++)
+                for (int i = 1; i < r_BoardSize && isDiagonalLosing; i++)
                 {
-                    isDiagonalLosing = (firstDiagonalSymbol == m_Board[i, m_BoardSize - i - 1]);
+                    isDiagonalLosing = (firstDiagonalSymbol == m_Board[i, r_BoardSize - i - 1]);
                 }
             }
 

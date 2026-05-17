@@ -2,23 +2,23 @@
 {
     public class Player
     {
-        private readonly string m_Name = string.Empty;
-        private readonly ePlayerSymbol m_Symbol = ePlayerSymbol.None;
-        private readonly bool m_IsCPU = false;
+        private readonly string r_Name = string.Empty;
+        private readonly ePlayerSymbol r_Symbol = ePlayerSymbol.None;
+        private readonly bool r_IsCPU = false;
         private int m_Score = 0;
 
         public Player(string i_Name, ePlayerSymbol i_Symbol, bool i_IsCPU)
         {
-            m_Name = i_Name;
-            m_Symbol = i_Symbol;
-            m_IsCPU = i_IsCPU;
+            r_Name = i_Name;
+            r_Symbol = i_Symbol;
+            r_IsCPU = i_IsCPU;
         }
 
         public string Name
         {
             get
             {
-                return m_Name;
+                return r_Name;
             }
         }
 
@@ -26,7 +26,7 @@
         {
             get
             {
-                return m_Symbol;
+                return r_Symbol;
             }
         }
 
@@ -43,7 +43,7 @@
         {
             get
             {
-                return m_IsCPU;
+                return r_IsCPU;
             }
         }
 

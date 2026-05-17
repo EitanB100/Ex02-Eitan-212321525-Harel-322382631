@@ -4,7 +4,7 @@
     {
         private GameBoard m_Board;
         private const int k_AmountOfPlayersInGame = 2;
-        private Player[] m_Players = new Player[2];
+        private Player[] m_Players = new Player[k_AmountOfPlayersInGame];
         private int m_CurrentPlayerIndex;
         private eGameState m_GameState;
 
@@ -72,7 +72,6 @@
             m_Board = new GameBoard(m_Board.BoardSize);
         }
 
-        //if pressed Q
         public void QuitCurrentGame()
         {
             m_GameState = eGameState.Quit;
