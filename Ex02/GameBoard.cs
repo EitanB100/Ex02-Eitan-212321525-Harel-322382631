@@ -89,7 +89,7 @@
 
                 for (int i = 1; i < m_BoardSize && isDiagonalLosing; i++)
                 {
-                    isDiagonalLosing = (isDiagonalLosing) && (firstDiagonalSymbol == m_Board[i, i]);
+                    isDiagonalLosing = (firstDiagonalSymbol == m_Board[i, i]);
                 }
             }
 
@@ -105,9 +105,9 @@
             {
                 isDiagonalLosing = true;
 
-                for (int i = 1; i < m_BoardSize; i++)
+                for (int i = 1; i < m_BoardSize && isDiagonalLosing; i++)
                 {
-                    isDiagonalLosing = (isDiagonalLosing) && (firstDiagonalSymbol == m_Board[i, m_BoardSize - i - 1]);
+                    isDiagonalLosing = (firstDiagonalSymbol == m_Board[i, m_BoardSize - i - 1]);
                 }
             }
 
