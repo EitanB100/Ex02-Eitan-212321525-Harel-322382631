@@ -41,6 +41,12 @@
             return m_GameState;
         }
 
+        public void ResetBoard()
+        {
+            m_GameState = eGameState.InProgress;
+            m_Board = new GameBoard(m_Board.BoardSize);
+        }
+
         private void switchTurn()
         {
             m_CurrentPlayerIndex = 1 - m_CurrentPlayerIndex;
