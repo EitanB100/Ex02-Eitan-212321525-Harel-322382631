@@ -86,11 +86,6 @@
             m_Players[1 - m_CurrentPlayerIndex].AddPoint();
         }
 
-        public bool EndOfSession()
-        {
-            return m_GameState == eGameState.Winner || m_GameState == eGameState.Draw;
-        }
-
         private void switchTurn()
         {
             m_CurrentPlayerIndex = 1 - m_CurrentPlayerIndex;

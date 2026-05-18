@@ -65,16 +65,20 @@ namespace Ex02
                     o_Row = int.Parse(userCommand[0]) - 1; // tile number starts from 1 and array starts from 0
                     o_Column = int.Parse(userCommand[1]) - 1;
 
-                    if (m_Game.Board.IsValidCellForWriting(o_Row, o_Column))
+                    if (o_Row < 0 || o_Row >= m_Game.Board.BoardSize
+                                  || o_Column < 0
+                                  || o_Column >= m_Game.Board.BoardSize)
                     {
-                        validInput = true;
+                        Console.WriteLine("Invalid input. Please enter values between 1 and {0}", m_Game.Board.BoardSize);
                     }
-                    else
+                    else if (!m_Game.Board.IsCellEmpty(o_Row, o_Column))
                     {
                         Console.WriteLine("Cell is already occupied. Choose another cell!");
                     }
-
-
+                    else
+                    {
+                        validInput = true;
+                    }
                 }
                 else
                 {
