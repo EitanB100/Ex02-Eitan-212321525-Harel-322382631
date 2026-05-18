@@ -7,7 +7,7 @@ namespace Ex02
         private const string k_TwoPlayersChoice = "1";
         private const string k_VsCPUChoice = "2";
 
-        private bool m_IsAgainstCPU;
+        private eGameMode m_IsAgainstCPU;
         private int m_BoardSize;
 
 
@@ -40,7 +40,7 @@ namespace Ex02
                 userGameModeChoice = Console.ReadLine();
             }
 
-            m_IsAgainstCPU = (userGameModeChoice == k_VsCPUChoice);
+            m_IsAgainstCPU = (userGameModeChoice == k_TwoPlayersChoice) ? eGameMode.TwoPlayers : eGameMode.PlayerVsCPU;
         }
 
         private void printGameModeOptions()
