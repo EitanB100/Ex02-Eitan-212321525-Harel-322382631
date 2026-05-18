@@ -33,7 +33,7 @@ namespace Ex02
                 printCurrentGameState();
                 getValidPlayerMove(out int chosenRow, out int chosenColumn);
 
-                if (m_Game.GameState == eGameState.Quit)
+                if (m_Game.GameState != eGameState.Quit)
                 {
                     m_Game.MakeMoveAndUpdateResult(chosenRow, chosenColumn);
                 }
@@ -67,7 +67,7 @@ namespace Ex02
         private string[] getUserInput()
         {
             Console.WriteLine("{0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
-            Console.WriteLine("you can also press {0} to quit", k_QuitButton);
+            Console.WriteLine("you can also press {0} to quit the round", k_QuitButton);
 
             string locationChoosenToPlaceOnBoard = Console.ReadLine();
             string[] splitInput = locationChoosenToPlaceOnBoard.Split(',');
