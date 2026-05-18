@@ -6,8 +6,10 @@ namespace Ex02
     {
         static void Main()
         {
-            Player player1 = new Player("P1" ,ePlayerSymbol.X, false);
-            Player player2 = new Player("P2", ePlayerSymbol.O, false);
+            const bool v_IsCPU = true;
+
+            Player player1 = new Player("P1" ,ePlayerSymbol.X, !v_IsCPU);
+            Player player2 = new Player("P2", ePlayerSymbol.O, !v_IsCPU);
             int chosenBoardSize = 4;    
             int startingPlayerIndex = 0; 
             Game myGame = new Game(chosenBoardSize, player1, player2, startingPlayerIndex);

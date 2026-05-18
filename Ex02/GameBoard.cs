@@ -181,30 +181,35 @@
                 gameBoard += string.Format(" {0}  ", numberToPrint);
             }
             gameBoard += "\n";
-            for (int hieghtIndex = 0; hieghtIndex < r_BoardSize; hieghtIndex++)
+            for (int heightIndex = 0; heightIndex < r_BoardSize; heightIndex++)
             {
                 for (int widthIndex = 0; widthIndex < r_BoardSize; widthIndex++)
                 {
                     if (widthIndex == 0)
                     {
-                        gameBoard += string.Format("{0}|", hieghtIndex + 1);
+                        gameBoard += string.Format("{0}|", heightIndex + 1);
                     }
-                    ePlayerSymbol tileSymbolOnSpot = GetCell(hieghtIndex, widthIndex);
-                    string tileToAddToBoard = GameSymbolConverterToSting(tileSymbolOnSpot);
+
+                    ePlayerSymbol tileSymbolOnSpot = GetCell(heightIndex, widthIndex);
+                    string tileToAddToBoard = GameSymbolConverterToString(tileSymbolOnSpot);
                     gameBoard += string.Format(" {0} |", tileToAddToBoard);
                 }
+
                 gameBoard += "\n";
                 gameBoard += " =";
-                for (int amountofEqualtoClosetable = 0; amountofEqualtoClosetable < r_BoardSize; amountofEqualtoClosetable++)
+
+                for (int amountOfEqualToCloseTable = 0; amountOfEqualToCloseTable < r_BoardSize; amountOfEqualToCloseTable++)
                 {
                     gameBoard += "====";
                 }
+
                 gameBoard += "\n";
             }
+
             return gameBoard;
         }
 
-        public string GameSymbolConverterToSting(ePlayerSymbol i_playerSymbol)
+        public string GameSymbolConverterToString(ePlayerSymbol i_playerSymbol)
         {
             string symbolAsString = string.Empty;
             switch (i_playerSymbol)
