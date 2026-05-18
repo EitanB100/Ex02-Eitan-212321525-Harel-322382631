@@ -13,52 +13,19 @@ namespace Ex02
             m_Game = i_Game;
         }
 
-        public void GameRun()
-        {
-            while (m_Game.GameState != eGameState.Quit)
-            {
-                m_Game.ResetBoard();
-
-                while (m_Game.GameState == eGameState.InProgress)
-                {
-                    printCurrentGameState();
-                    getValidPlayerMove(out int chosenRow, out int chosenColumn);
-
-                    if (m_Game.GameState == eGameState.Quit)
-                    {
-                        break;
-                    }
-
-                    m_Game.MakeMoveAndUpdateResult(chosenRow, chosenColumn);
-
-                    if (m_Game.EndOfSession())
-                    {
-                        printCurrentGameState();
-                        Console.WriteLine("Round Over");
-                        Console.WriteLine("press {0} to quit else you will play another round", k_QuitButton);
-                        
-                        string userInput = Console.ReadLine();
-
-                        if (userInput.ToUpper() == k_QuitButton)
-                        {
-                            m_Game.QuitCurrentGame();
-                        }
-                    }
-                }
-            }
-        }
-
         private void printPlayersScore()
         {
-            Console.WriteLine("Score: {0}-{1} | {2}-{3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
+            Console.WriteLine("Score: {0} - {1} | {2} - {3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
         }
 
         private string[] getUserInput()
         {
-            Console.WriteLine("Player {0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
-            Console.WriteLine("you can also press {0} to quit", k_QuitButton);
+            Console.WriteLine("{0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
+            Console.WriteLine("you can also press {0} to quit the round", k_QuitButton);
+
             string locationChoosenToPlaceOnBoard = Console.ReadLine();
             string[] splitInput = locationChoosenToPlaceOnBoard.Split(',');
+
             return splitInput;
         }
 
@@ -69,54 +36,64 @@ namespace Ex02
             return isLineValid && isColumnValid;
         }
 
-        private void getValidPlayerMove(out int o_Row, out int o_Column)
+        public void PrintCurrentGameState()
+        {
+            ConsoleUtils.Screen.Clear();
+            printPlayersScore();
+            Console.WriteLine();
+            Console.WriteLine(m_Game.Board.BuildBoardString());
+        }
+
+        public bool GetValidPlayerMove(out int o_Row, out int o_Column)
         {
             o_Row = 0;
             o_Column = 0;
             bool validInput = false;
-            while (!validInput)
+            bool playerQuit = false;
+
+            while (!validInput && !playerQuit)
             {
                 string[] userCommand = getUserInput();
 
                 if (userCommand.Length == 1 && userCommand[0].ToUpper() == k_QuitButton)
                 {
-                    m_Game.QuitCurrentGame();
-                    validInput = true;
+                    playerQuit = true;
                 }
 
-                if (userCommand.Length == 2)
+                else if (userCommand.Length == 2 && validateUserInput(userCommand[0], userCommand[1]))
                 {
-                    bool isValid = validateUserInput(userCommand[0], userCommand[1]);
+                    o_Row = int.Parse(userCommand[0]) - 1; // tile number starts from 1 and array starts from 0
+                    o_Column = int.Parse(userCommand[1]) - 1;
 
-                    if (isValid)
+                    if (m_Game.Board.IsValidCellForWriting(o_Row, o_Column))
                     {
-                        o_Row = int.Parse(userCommand[0]) - 1; // tile number starts from 1 and array starts from 0
-                        o_Column = int.Parse(userCommand[1]) - 1;
-
-                        if (m_Game.Board.IsValidCellForWriting(o_Row, o_Column))
-                        {
-                            validInput = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Cell is already occupied. Choose another cell!");
-                        }
-
+                        validInput = true;
                     }
-                }
+                    else
+                    {
+                        Console.WriteLine("Cell is already occupied. Choose another cell!");
+                    }
 
-                if (!validInput)
+
+                }
+                else
                 {
                     Console.WriteLine("Invalid input. Please enter your move (row and column) like this: 1,2 , make sure it is empty cell");
                 }
             }
+
+            return !playerQuit;
         }
 
-        private void printCurrentGameState()
+        public bool DoesUserWantToContinue()
         {
-            ConsoleUtils.Screen.Clear();
-            printPlayersScore();
-            Console.WriteLine(m_Game.Board.BuildBoardString());
+            PrintCurrentGameState();
+            Console.WriteLine("Round over! press {0} to quit, or any other key to continue to the next round", k_QuitButton);
+
+            string userInput = Console.ReadLine();
+            bool doesUserWantToContinue = (userInput.ToUpper() != k_QuitButton);
+
+            return doesUserWantToContinue;
         }
     }
 }
