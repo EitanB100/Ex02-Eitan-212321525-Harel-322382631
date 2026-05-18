@@ -4,6 +4,8 @@ namespace Ex02
 {
     public class Screen
     {
+        private const string k_QuitButton = "Q";
+
         private Game m_Game;
 
         public Screen(Game i_Game)
@@ -33,9 +35,11 @@ namespace Ex02
                     {
                         printCurrentGameState();
                         Console.WriteLine("Round Over");
-                        Console.WriteLine("press Q to quit else you will play another round");
+                        Console.WriteLine("press {0} to quit else you will play another round", k_QuitButton);
+                        
                         string userInput = Console.ReadLine();
-                        if (userInput.ToUpper() == "Q")
+
+                        if (userInput.ToUpper() == k_QuitButton)
                         {
                             m_Game.QuitCurrentGame();
                         }

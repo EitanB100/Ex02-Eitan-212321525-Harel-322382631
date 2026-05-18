@@ -2,8 +2,8 @@
 {
     public class GameBoard
     {
-        private const int k_MinimumBoardSize = 3;
-        private const int k_MaximumBoardSize = 9;
+        internal const int k_MinimumBoardSize = 3;
+        internal const int k_MaximumBoardSize = 9;
 
         private readonly int r_BoardSize = 3;
         private ePlayerSymbol[,] m_Board;
@@ -14,6 +14,16 @@
             m_Board = new ePlayerSymbol[i_BoardSize, i_BoardSize];
 
             fillBoardAtGameInit();
+        }
+
+        public static int GetMinimumBoardSize()
+        {
+            return k_MinimumBoardSize;
+        }
+
+        public static int GetMaximumBoardSize()
+        {
+            return k_MaximumBoardSize;
         }
 
         public int BoardSize

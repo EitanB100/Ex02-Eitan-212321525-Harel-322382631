@@ -7,20 +7,23 @@ namespace Ex02
         private const string k_TwoPlayersChoice = "1";
         private const string k_VsCPUChoice = "2";
 
-        private eGameMode m_IsAgainstCPU;
+        private eGameMode m_GameMode;
         private int m_BoardSize;
 
 
         private void requestBoardSizeFromUser()
         {
-            Console.WriteLine("Please enter board size (3-9 inclusive):");
+            int minimumBoardSize = GameBoard.GetMinimumBoardSize();
+            int maximumBoardSize = GameBoard.GetMaximumBoardSize();
+
+            Console.WriteLine("Please enter board size ({0}-{1} inclusive):", minimumBoardSize, maximumBoardSize );
 
             int requestedSize;
             bool isValidInput = int.TryParse(Console.ReadLine(), out requestedSize);
 
             while (!isValidInput || !GameBoard.IsValidBoardSize(requestedSize))
             {
-                Console.WriteLine("Invalid size. Please enter a value between 3-9:");
+                Console.WriteLine("Invalid size. Please enter a value between {0}-{1}:", minimumBoardSize, maximumBoardSize);
                 isValidInput = int.TryParse(Console.ReadLine(), out requestedSize);
             }
 
@@ -40,14 +43,14 @@ namespace Ex02
                 userGameModeChoice = Console.ReadLine();
             }
 
-            m_IsAgainstCPU = (userGameModeChoice == k_TwoPlayersChoice) ? eGameMode.TwoPlayers : eGameMode.PlayerVsCPU;
+            m_GameMode = (userGameModeChoice == k_TwoPlayersChoice) ? eGameMode.TwoPlayers : eGameMode.PlayerVsCPU;
         }
 
         private void printGameModeOptions()
         {
             Console.WriteLine("2 Players or Vs CPU?");
-            Console.WriteLine("1 - 2 Players");
-            Console.WriteLine("2 - Vs CPU");
+            Console.WriteLine("{0} - 2 Players", k_TwoPlayersChoice);
+            Console.WriteLine("{0} - Vs CPU", k_VsCPUChoice);
         }
     }
 }
