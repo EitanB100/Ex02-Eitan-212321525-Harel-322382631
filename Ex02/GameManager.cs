@@ -36,5 +36,18 @@
                 }
             }
         }
+
+        private void runGameSession(Game i_Game, Screen i_Screen)
+        {
+            bool playAgain = true;
+
+            while (playAgain)
+            {
+                i_Game.ResetBoard();
+                playRound(i_Game, i_Screen);
+
+                playAgain = i_Screen.DoesUserWantToContinue();
+            }
+        }
     }
 }

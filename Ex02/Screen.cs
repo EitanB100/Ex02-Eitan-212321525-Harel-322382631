@@ -13,17 +13,6 @@ namespace Ex02
             m_Game = i_Game;
         }
 
-        private bool doesUserWantToContinue()
-        {
-            PrintCurrentGameState();
-            Console.WriteLine("Round over! press {0} to quit, or any other key to continue to the next round", k_QuitButton);
-
-            string userInput = Console.ReadLine();
-            bool doesUserWantToContinue = (userInput.ToUpper() != k_QuitButton);
-
-            return doesUserWantToContinue;
-        }
-
         private void printPlayersScore()
         {
             Console.WriteLine("Score: {0} - {1} | {2} - {3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
@@ -94,6 +83,17 @@ namespace Ex02
             }
 
             return !playerQuit;
+        }
+
+        public bool DoesUserWantToContinue()
+        {
+            PrintCurrentGameState();
+            Console.WriteLine("Round over! press {0} to quit, or any other key to continue to the next round", k_QuitButton);
+
+            string userInput = Console.ReadLine();
+            bool doesUserWantToContinue = (userInput.ToUpper() != k_QuitButton);
+
+            return doesUserWantToContinue;
         }
     }
 }
