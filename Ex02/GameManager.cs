@@ -15,7 +15,7 @@
             Game game = new Game(settings.BoardSize, player1, player2, 0);
             Screen screen = new Screen(game);
 
-            playRound(game, screen);
+            runGameSession(game, screen);
         }
 
         private void playRound(Game i_Game, Screen i_Screen)
