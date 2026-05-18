@@ -44,12 +44,12 @@ namespace Ex02
             }
         }
 
-        public void printPlayersScore()
+        private void printPlayersScore()
         {
             Console.WriteLine("Score: {0}-{1} | {2}-{3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
         }
 
-        public string[] GetUserInput()
+        private string[] getUserInput()
         {
             Console.WriteLine("Player {0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
             Console.WriteLine("you can also press Q to quit");
@@ -58,14 +58,14 @@ namespace Ex02
             return splitInput;
         }
 
-        public bool ValidateUserInput(string i_LineChosenString, string i_ColumnChosenString)
+        private bool validateUserInput(string i_LineChosenString, string i_ColumnChosenString)
         {
-            bool isLineValid = int.TryParse(i_LineChosenString, out int o_DummyPlaceHolder);
-            bool isColumnValid = int.TryParse(i_ColumnChosenString, out int o_DummyPlaceHolder2);
+            bool isLineValid = int.TryParse(i_LineChosenString, out int DummyPlaceHolder);
+            bool isColumnValid = int.TryParse(i_ColumnChosenString, out int DummyPlaceHolder2);
             return isLineValid && isColumnValid;
         }
 
-        public void GetValidPlayerMove(out int o_Row, out int o_Column)
+        private void getValidPlayerMove(out int o_Row, out int o_Column)
         {
             o_Row = 0;
             o_Column = 0;
