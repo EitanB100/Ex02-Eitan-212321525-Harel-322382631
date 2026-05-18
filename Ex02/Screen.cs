@@ -69,7 +69,7 @@ namespace Ex02
                                   || o_Column < 0
                                   || o_Column >= m_Game.Board.BoardSize)
                     {
-                        Console.WriteLine("Invaid input. Please enter values between 1 and {0}", m_Game.Board.BoardSize);
+                        Console.WriteLine("Invalid input. Please enter values between 1 and {0}", m_Game.Board.BoardSize);
                     }
                     else if (!m_Game.Board.IsCellEmpty(o_Row, o_Column))
                     {
