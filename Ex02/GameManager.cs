@@ -14,7 +14,8 @@
 
             Game game = new Game(settings.BoardSize, player1, player2, 0);
             Screen screen = new Screen(game);
-            screen.GameRun();
+
+            playRound(game, screen);
         }
 
         private void playRound(Game i_Game, Screen i_Screen)
@@ -23,7 +24,7 @@
             {
                 i_Screen.PrintCurrentGameState();
 
-                bool playerContinues = i_Screen.getValidPlayerMove(out int chosenRow, out int chosenColumn);
+                bool playerContinues = i_Screen.GetValidPlayerMove(out int chosenRow, out int chosenColumn);
 
                 if (playerContinues)
                 {

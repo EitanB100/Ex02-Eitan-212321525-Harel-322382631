@@ -13,19 +13,6 @@ namespace Ex02
             m_Game = i_Game;
         }
 
-        public void GameRun()
-        {
-            bool playAgain = true;
-
-            while (playAgain)
-            {
-                m_Game.ResetBoard();
-                playRound();
-
-                playAgain = doesUserWantToContinue();
-            }
-        }
-
         private bool doesUserWantToContinue()
         {
             PrintCurrentGameState();
@@ -36,7 +23,6 @@ namespace Ex02
 
             return doesUserWantToContinue;
         }
-
 
         private void printPlayersScore()
         {
@@ -69,7 +55,7 @@ namespace Ex02
             Console.WriteLine(m_Game.Board.BuildBoardString());
         }
 
-        public bool getValidPlayerMove(out int o_Row, out int o_Column)
+        public bool GetValidPlayerMove(out int o_Row, out int o_Column)
         {
             o_Row = 0;
             o_Column = 0;
