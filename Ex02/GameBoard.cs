@@ -172,5 +172,54 @@
 
             return isDiagonalLosing;
         }
+
+        public string BuildBoardString()
+        {
+            string gameBoard = "  ";
+            for (int numberToPrint = 1; numberToPrint <= r_BoardSize; numberToPrint++)
+            {
+                gameBoard += string.Format(" {0}  ", numberToPrint);
+            }
+            gameBoard += "\n";
+            for (int hieghtIndex = 0; hieghtIndex < r_BoardSize; hieghtIndex++)
+            {
+                for (int widthIndex = 0; widthIndex < r_BoardSize; widthIndex++)
+                {
+                    if (widthIndex == 0)
+                    {
+                        gameBoard += string.Format("{0}|", hieghtIndex + 1);
+                    }
+                    ePlayerSymbol tileSymbolOnSpot = GetCell(hieghtIndex, widthIndex);
+                    string tileToAddToBoard = GameSymbolConverterToSting(tileSymbolOnSpot);
+                    gameBoard += string.Format(" {0} |", tileToAddToBoard);
+                }
+                gameBoard += "\n";
+                gameBoard += " =";
+                for (int amountofEqualtoClosetable = 0; amountofEqualtoClosetable < r_BoardSize; amountofEqualtoClosetable++)
+                {
+                    gameBoard += "====";
+                }
+                gameBoard += "\n";
+            }
+            return gameBoard;
+        }
+
+        public string GameSymbolConverterToSting(ePlayerSymbol i_playerSymbol)
+        {
+            string symbolAsString = string.Empty;
+            switch (i_playerSymbol)
+            {
+                case ePlayerSymbol.None:
+                    symbolAsString = " ";
+                    break;
+                case ePlayerSymbol.X:
+                    symbolAsString = "X";
+                    break;
+                case ePlayerSymbol.O:
+                    symbolAsString = "O";
+                    break;
+            }
+            return symbolAsString;
+        }
     }
 }

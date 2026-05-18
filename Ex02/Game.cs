@@ -42,6 +42,14 @@
             }
         }
 
+        public eGameState GameState
+        {
+            get
+            {
+                return m_GameState;
+            }
+        }
+
         public eGameState MakeMoveAndUpdateResult(int i_RequestedRow, int i_RequestedColumn)
         {
             if (m_Board.IsValidCellForWriting(i_RequestedRow, i_RequestedColumn)) 
@@ -80,6 +88,11 @@
         private void switchTurn()
         {
             m_CurrentPlayerIndex = 1 - m_CurrentPlayerIndex;
+        }
+
+        public bool endOfSession()
+        {
+            return m_GameState == eGameState.Winner || m_GameState == eGameState.Draw;
         }
     }
 }
