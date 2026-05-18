@@ -12,22 +12,6 @@ namespace Ex02
         private string m_Player2Name;
         private int m_BoardSize;
 
-        public eGameMode GameMode
-        {
-            get
-            {
-                return m_GameMode;
-            }
-        }
-
-        public int BoardSize
-        {
-            get
-            {
-                return m_BoardSize;
-            }
-        }
-
         public GameSettings Run()
         {
             printIntroMessage();
