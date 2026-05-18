@@ -10,6 +10,35 @@ namespace Ex02
         private eGameMode m_GameMode;
         private int m_BoardSize;
 
+        public eGameMode GameMode
+        {
+            get
+            {
+                return m_GameMode;
+            }
+        }
+
+        public int BoardSize
+        {
+            get
+            {
+                return m_BoardSize;
+            }
+        }
+
+        public void Run()
+        {
+            printIntroMessage();
+            requestBoardSizeFromUser();
+            requestGameModeFromUser();
+        }
+
+        private void printIntroMessage()
+        {
+            Console.WriteLine("WELCOME TO INVERTED TIC-TAC-TOE");
+            Console.WriteLine("The rules are simple - you streak, you lose!");
+            Console.WriteLine("Let's setup the game:");
+        }
 
         private void requestBoardSizeFromUser()
         {
