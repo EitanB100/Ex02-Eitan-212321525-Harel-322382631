@@ -15,37 +15,40 @@ namespace Ex02
 
         public void GameRun()
         {
-            while (m_Game.GameState != eGameState.Quit)
+            bool playAgain = true;
+
+            while (playAgain)
             {
                 m_Game.ResetBoard();
+                playRound();
 
-                while (m_Game.GameState == eGameState.InProgress)
+                playAgain = doesUserWantToContinue();
+            }
+        }
+
+        private void playRound()
+        {
+            while (m_Game.GameState == eGameState.InProgress)
+            {
+                printCurrentGameState();
+                getValidPlayerMove(out int chosenRow, out int chosenColumn);
+
+                if (m_Game.GameState == eGameState.Quit)
                 {
-                    printCurrentGameState();
-                    getValidPlayerMove(out int chosenRow, out int chosenColumn);
-
-                    if (m_Game.GameState == eGameState.Quit)
-                    {
-                        break;
-                    }
-
                     m_Game.MakeMoveAndUpdateResult(chosenRow, chosenColumn);
-
-                    if (m_Game.EndOfSession())
-                    {
-                        printCurrentGameState();
-                        Console.WriteLine("Round Over");
-                        Console.WriteLine("press {0} to quit else you will play another round", k_QuitButton);
-
-                        string userInput = Console.ReadLine();
-
-                        if (userInput.ToUpper() == k_QuitButton)
-                        {
-                            m_Game.QuitCurrentGame();
-                        }
-                    }
                 }
             }
+        }
+
+        private bool doesUserWantToContinue()
+        {
+            printCurrentGameState();
+            Console.WriteLine("Round over! press {0} to quit, or any other key to continue to the next round", k_QuitButton);
+
+            string userInput = Console.ReadLine();
+            bool doesUserWantToContinue = (userInput.ToUpper() != k_QuitButton);
+
+            return doesUserWantToContinue;
         }
 
         private void printCurrentGameState()
