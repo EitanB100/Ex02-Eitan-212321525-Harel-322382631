@@ -36,10 +36,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="eGameMode.cs" />
     <Compile Include="eGameState.cs" />
     <Compile Include="ePlayerSymbol.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameBoard.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Screen.cs" />

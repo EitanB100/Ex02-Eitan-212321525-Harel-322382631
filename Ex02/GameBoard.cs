@@ -2,6 +2,9 @@
 {
     public class GameBoard
     {
+        private const int k_MinimumBoardSize = 3;
+        private const int k_MaximumBoardSize = 9;
+
         private readonly int r_BoardSize = 3;
         private ePlayerSymbol[,] m_Board;
 
@@ -19,6 +22,14 @@
             {
                 return r_BoardSize;
             }
+        }
+
+        public static bool IsValidBoardSize(int i_Size)
+        {
+            bool isValidBoardSize = (i_Size >= k_MinimumBoardSize 
+                                    && i_Size <= k_MaximumBoardSize);
+
+            return isValidBoardSize;
         }
 
         public ePlayerSymbol GetCell(int i_Row, int i_Col)
