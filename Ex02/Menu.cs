@@ -8,6 +8,8 @@ namespace Ex02
         private const string k_VsCPUChoice = "2";
 
         private eGameMode m_GameMode;
+        private string m_Player1Name;
+        private string m_Player2Name;
         private int m_BoardSize;
 
         public eGameMode GameMode
@@ -29,10 +31,11 @@ namespace Ex02
         public GameSettings Run()
         {
             printIntroMessage();
-            requestBoardSizeFromUser();
             requestGameModeFromUser();
+            requestPlayerNames();
+            requestBoardSizeFromUser();
 
-            GameSettings requestedGameSettings = new GameSettings(m_GameMode, m_BoardSize);
+            GameSettings requestedGameSettings = new GameSettings(m_GameMode, m_Player1Name, m_Player2Name, m_BoardSize);
 
             return requestedGameSettings;
         }
@@ -42,6 +45,40 @@ namespace Ex02
             Console.WriteLine("WELCOME TO INVERTED TIC-TAC-TOE");
             Console.WriteLine("The rules are simple - you streak, you lose!");
             Console.WriteLine("Let's setup the game:");
+        }
+
+        private void requestPlayerNames()
+        {
+            string player1NameRequest = (m_GameMode == eGameMode.PlayerVsCPU) ? "Enter Player's name:" : "Enter Player 1's name:";
+            
+            Console.WriteLine(player1NameRequest);
+            m_Player1Name = Console.ReadLine();
+
+            if (m_GameMode == eGameMode.TwoPlayers)
+            {
+                Console.WriteLine("Enter Player 2's name:");
+                m_Player2Name = Console.ReadLine();
+            }
+            else
+            {
+                m_Player2Name = "CPU";
+            }
+        }
+
+        private void requestGameModeFromUser()
+        {
+            printGameModeOptions();
+            string userGameModeChoice = Console.ReadLine();
+
+            while (userGameModeChoice != k_TwoPlayersChoice && userGameModeChoice != k_VsCPUChoice)
+            {
+                Console.WriteLine("Invalid choice");
+                printGameModeOptions();
+
+                userGameModeChoice = Console.ReadLine();
+            }
+
+            m_GameMode = (userGameModeChoice == k_TwoPlayersChoice) ? eGameMode.TwoPlayers : eGameMode.PlayerVsCPU;
         }
 
         private void requestBoardSizeFromUser()
@@ -63,21 +100,7 @@ namespace Ex02
             m_BoardSize = requestedSize;
         }
 
-        private void requestGameModeFromUser()
-        {
-            printGameModeOptions();
-            string userGameModeChoice = Console.ReadLine();
-
-            while (userGameModeChoice != k_TwoPlayersChoice && userGameModeChoice != k_VsCPUChoice)
-            {
-                Console.WriteLine("Invalid choice");
-                printGameModeOptions();
-
-                userGameModeChoice = Console.ReadLine();
-            }
-
-            m_GameMode = (userGameModeChoice == k_TwoPlayersChoice) ? eGameMode.TwoPlayers : eGameMode.PlayerVsCPU;
-        }
+        
 
         private void printGameModeOptions()
         {

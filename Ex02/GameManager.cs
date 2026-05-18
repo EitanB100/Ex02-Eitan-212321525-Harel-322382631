@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex02
+﻿namespace Ex02
 {
     internal class GameManager
     {
@@ -12,6 +6,14 @@ namespace Ex02
         {
             Menu gameMenu = new Menu();
             GameSettings settings = gameMenu.Run();
+            bool isPlayer2CPU = (settings.GameMode == eGameMode.PlayerVsCPU);
+
+            Player player1 = new Player(settings.Player1Name, ePlayerSymbol.X, false);
+            Player player2 = new Player(settings.Player2Name, ePlayerSymbol.O, isPlayer2CPU);
+
+            Game game = new Game(settings.BoardSize, player1, player2, 0);
+            Screen screen = new Screen(game);
+            screen.GameRun();
         }
     }
 }
