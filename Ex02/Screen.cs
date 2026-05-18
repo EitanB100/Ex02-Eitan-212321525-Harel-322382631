@@ -82,48 +82,45 @@ namespace Ex02
             return isLineValid && isColumnValid;
         }
 
-        private void getValidPlayerMove(out int o_Row, out int o_Column)
+        private bool getValidPlayerMove(out int o_Row, out int o_Column)
         {
             o_Row = 0;
             o_Column = 0;
             bool validInput = false;
+            bool playerQuit = false;
 
-            while (!validInput)
+            while (!validInput && !playerQuit)
             {
                 string[] userCommand = getUserInput();
 
                 if (userCommand.Length == 1 && userCommand[0].ToUpper() == k_QuitButton)
                 {
-                    m_Game.QuitCurrentGame();
-                    validInput = true;
+                    playerQuit = true;
                 }
 
-                if (userCommand.Length == 2)
+                else if (userCommand.Length == 2 && validateUserInput(userCommand[0], userCommand[1]))
                 {
-                    bool isValid = validateUserInput(userCommand[0], userCommand[1]);
+                    o_Row = int.Parse(userCommand[0]) - 1; // tile number starts from 1 and array starts from 0
+                    o_Column = int.Parse(userCommand[1]) - 1;
 
-                    if (isValid)
+                    if (m_Game.Board.IsValidCellForWriting(o_Row, o_Column))
                     {
-                        o_Row = int.Parse(userCommand[0]) - 1; // tile number starts from 1 and array starts from 0
-                        o_Column = int.Parse(userCommand[1]) - 1;
-
-                        if (m_Game.Board.IsValidCellForWriting(o_Row, o_Column))
-                        {
-                            validInput = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Cell is already occupied. Choose another cell!");
-                        }
-
+                        validInput = true;
                     }
-                }
+                    else
+                    {
+                        Console.WriteLine("Cell is already occupied. Choose another cell!");
+                    }
 
-                if (!validInput)
+
+                }
+                else
                 {
                     Console.WriteLine("Invalid input. Please enter your move (row and column) like this: 1,2 , make sure it is empty cell");
                 }
             }
+
+            return !playerQuit;
         }
     }
 }
