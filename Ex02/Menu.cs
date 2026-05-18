@@ -26,11 +26,15 @@ namespace Ex02
             }
         }
 
-        public void Run()
+        public GameSettings Run()
         {
             printIntroMessage();
             requestBoardSizeFromUser();
             requestGameModeFromUser();
+
+            GameSettings requestedGameSettings = new GameSettings(m_GameMode, m_BoardSize);
+
+            return requestedGameSettings;
         }
 
         private void printIntroMessage()
