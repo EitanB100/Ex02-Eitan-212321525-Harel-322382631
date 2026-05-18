@@ -18,7 +18,7 @@
             }
             else
             {
-                Player2 = new CPU(settings.Player2Name, ePlayerSymbol.O);
+                player2 = new CPU(settings.Player2Name, ePlayerSymbol.O);
             }
 
             Game game = new Game(settings.BoardSize, player1, player2, 0);
