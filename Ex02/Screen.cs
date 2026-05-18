@@ -88,7 +88,7 @@ namespace Ex02
                     {
                         o_Row = int.Parse(userCommand[0]) - 1; // tile number starts from 1 and array starts from 0
                         o_Column = int.Parse(userCommand[1]) - 1;
-                        
+
                         if (m_Game.Board.IsValidCellForWriting(o_Row, o_Column))
                         {
                             validInput = true;
