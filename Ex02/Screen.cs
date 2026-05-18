@@ -36,7 +36,7 @@ namespace Ex02
                         printCurrentGameState();
                         Console.WriteLine("Round Over");
                         Console.WriteLine("press {0} to quit else you will play another round", k_QuitButton);
-                        
+
                         string userInput = Console.ReadLine();
 
                         if (userInput.ToUpper() == k_QuitButton)
@@ -48,17 +48,27 @@ namespace Ex02
             }
         }
 
+        private void printCurrentGameState()
+        {
+            ConsoleUtils.Screen.Clear();
+            printPlayersScore();
+            Console.WriteLine();
+            Console.WriteLine(m_Game.Board.BuildBoardString());
+        }
+
         private void printPlayersScore()
         {
-            Console.WriteLine("Score: {0}-{1} | {2}-{3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
+            Console.WriteLine("Score: {0} - {1} | {2} - {3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
         }
 
         private string[] getUserInput()
         {
-            Console.WriteLine("Player {0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
+            Console.WriteLine("{0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
             Console.WriteLine("you can also press {0} to quit", k_QuitButton);
+
             string locationChoosenToPlaceOnBoard = Console.ReadLine();
             string[] splitInput = locationChoosenToPlaceOnBoard.Split(',');
+
             return splitInput;
         }
 
@@ -74,6 +84,7 @@ namespace Ex02
             o_Row = 0;
             o_Column = 0;
             bool validInput = false;
+
             while (!validInput)
             {
                 string[] userCommand = getUserInput();
@@ -110,13 +121,6 @@ namespace Ex02
                     Console.WriteLine("Invalid input. Please enter your move (row and column) like this: 1,2 , make sure it is empty cell");
                 }
             }
-        }
-
-        private void printCurrentGameState()
-        {
-            ConsoleUtils.Screen.Clear();
-            printPlayersScore();
-            Console.WriteLine(m_Game.Board.BuildBoardString());
         }
     }
 }

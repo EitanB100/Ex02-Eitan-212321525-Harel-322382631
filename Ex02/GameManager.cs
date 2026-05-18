@@ -6,9 +6,10 @@
         {
             Menu gameMenu = new Menu();
             GameSettings settings = gameMenu.Run();
+            const bool v_IsPlayer1CPU = false;
             bool isPlayer2CPU = (settings.GameMode == eGameMode.PlayerVsCPU);
 
-            Player player1 = new Player(settings.Player1Name, ePlayerSymbol.X, false);
+            Player player1 = new Player(settings.Player1Name, ePlayerSymbol.X, v_IsPlayer1CPU);
             Player player2 = new Player(settings.Player2Name, ePlayerSymbol.O, isPlayer2CPU);
 
             Game game = new Game(settings.BoardSize, player1, player2, 0);

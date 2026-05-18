@@ -3,8 +3,8 @@
     public class GameSettings
     {
         private readonly eGameMode r_GameMode;
-        private readonly string r_Player1Name = "P1";
-        private readonly string r_Player2Name = "CPU";
+        private readonly string r_Player1Name;
+        private readonly string r_Player2Name;
         private readonly int r_BoardSize;
 
 

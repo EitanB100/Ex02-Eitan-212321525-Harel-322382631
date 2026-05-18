@@ -31,8 +31,11 @@ namespace Ex02
         public GameSettings Run()
         {
             printIntroMessage();
+            Console.WriteLine();
             requestGameModeFromUser();
+            Console.WriteLine();
             requestPlayerNames();
+            Console.WriteLine();
             requestBoardSizeFromUser();
 
             GameSettings requestedGameSettings = new GameSettings(m_GameMode, m_Player1Name, m_Player2Name, m_BoardSize);
@@ -44,25 +47,8 @@ namespace Ex02
         {
             Console.WriteLine("WELCOME TO INVERTED TIC-TAC-TOE");
             Console.WriteLine("The rules are simple - you streak, you lose!");
+            Console.WriteLine();
             Console.WriteLine("Let's setup the game:");
-        }
-
-        private void requestPlayerNames()
-        {
-            string player1NameRequest = (m_GameMode == eGameMode.PlayerVsCPU) ? "Enter Player's name:" : "Enter Player 1's name:";
-            
-            Console.WriteLine(player1NameRequest);
-            m_Player1Name = Console.ReadLine();
-
-            if (m_GameMode == eGameMode.TwoPlayers)
-            {
-                Console.WriteLine("Enter Player 2's name:");
-                m_Player2Name = Console.ReadLine();
-            }
-            else
-            {
-                m_Player2Name = "CPU";
-            }
         }
 
         private void requestGameModeFromUser()
@@ -81,12 +67,41 @@ namespace Ex02
             m_GameMode = (userGameModeChoice == k_TwoPlayersChoice) ? eGameMode.TwoPlayers : eGameMode.PlayerVsCPU;
         }
 
+        private void requestPlayerNames()
+        {
+            string player1NameRequest = (m_GameMode == eGameMode.PlayerVsCPU) ? "Enter Player's name" : "Enter Player 1's name";
+            player1NameRequest += " (Leave empty for P1):";
+
+            Console.WriteLine(player1NameRequest);
+            m_Player1Name = Console.ReadLine();
+            
+            if (m_Player1Name == string.Empty)
+            {
+                m_Player1Name = "P1";
+            }
+
+            if (m_GameMode == eGameMode.TwoPlayers)
+            {
+                Console.WriteLine("Enter Player 2's name (Leave empty for P2):");
+                m_Player2Name = Console.ReadLine();
+                
+                if (m_Player2Name == string.Empty)
+                {
+                    m_Player2Name = "P2";
+                }
+            }
+            else
+            {
+                m_Player2Name = "CPU";
+            }
+        }
+
         private void requestBoardSizeFromUser()
         {
             int minimumBoardSize = GameBoard.GetMinimumBoardSize();
             int maximumBoardSize = GameBoard.GetMaximumBoardSize();
 
-            Console.WriteLine("Please enter board size ({0}-{1} inclusive):", minimumBoardSize, maximumBoardSize );
+            Console.WriteLine("Please enter board size ({0}-{1} inclusive):", minimumBoardSize, maximumBoardSize);
 
             int requestedSize;
             bool isValidInput = int.TryParse(Console.ReadLine(), out requestedSize);
@@ -100,11 +115,12 @@ namespace Ex02
             m_BoardSize = requestedSize;
         }
 
-        
+
 
         private void printGameModeOptions()
         {
             Console.WriteLine("2 Players or Vs CPU?");
+            Console.WriteLine();
             Console.WriteLine("{0} - 2 Players", k_TwoPlayersChoice);
             Console.WriteLine("{0} - Vs CPU", k_VsCPUChoice);
         }
