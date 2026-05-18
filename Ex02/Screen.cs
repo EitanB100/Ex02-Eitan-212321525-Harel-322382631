@@ -56,7 +56,7 @@ namespace Ex02
         private string[] getUserInput()
         {
             Console.WriteLine("Player {0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
-            Console.WriteLine("you can also press Q to quit");
+            Console.WriteLine("you can also press {0} to quit", k_QuitButton);
             string locationChoosenToPlaceOnBoard = Console.ReadLine();
             string[] splitInput = locationChoosenToPlaceOnBoard.Split(',');
             return splitInput;
@@ -78,7 +78,7 @@ namespace Ex02
             {
                 string[] userCommand = getUserInput();
 
-                if (userCommand.Length == 1 && userCommand[0].ToUpper() == "Q")
+                if (userCommand.Length == 1 && userCommand[0].ToUpper() == k_QuitButton)
                 {
                     m_Game.QuitCurrentGame();
                     validInput = true;
