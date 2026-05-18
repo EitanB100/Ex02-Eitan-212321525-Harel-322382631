@@ -20,7 +20,7 @@ namespace Ex02
                 while (m_Game.GameState == eGameState.InProgress)
                 {
                     printCurrentGameState();
-                    GetValidPlayerMove(out int chosenRow, out int chosenColumn);
+                    getValidPlayerMove(out int chosenRow, out int chosenColumn);
 
                     if (m_Game.GameState == eGameState.Quit)
                     {
@@ -60,8 +60,8 @@ namespace Ex02
 
         private bool validateUserInput(string i_LineChosenString, string i_ColumnChosenString)
         {
-            bool isLineValid = int.TryParse(i_LineChosenString, out int DummyPlaceHolder);
-            bool isColumnValid = int.TryParse(i_ColumnChosenString, out int DummyPlaceHolder2);
+            bool isLineValid = int.TryParse(i_LineChosenString, out int dummyPlaceHolder);
+            bool isColumnValid = int.TryParse(i_ColumnChosenString, out int dummyPlaceHolder2);
             return isLineValid && isColumnValid;
         }
 
@@ -72,7 +72,7 @@ namespace Ex02
             bool validInput = false;
             while (!validInput)
             {
-                string[] userCommand = GetUserInput();
+                string[] userCommand = getUserInput();
 
                 if (userCommand.Length == 1 && userCommand[0].ToUpper() == "Q")
                 {
@@ -82,7 +82,7 @@ namespace Ex02
 
                 if (userCommand.Length == 2)
                 {
-                    bool isValid = ValidateUserInput(userCommand[0], userCommand[1]);
+                    bool isValid = validateUserInput(userCommand[0], userCommand[1]);
 
                     if (isValid)
                     {
