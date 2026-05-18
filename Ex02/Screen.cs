@@ -31,11 +31,16 @@ namespace Ex02
             while (m_Game.GameState == eGameState.InProgress)
             {
                 printCurrentGameState();
-                getValidPlayerMove(out int chosenRow, out int chosenColumn);
 
-                if (m_Game.GameState != eGameState.Quit)
+                bool playerContinues = getValidPlayerMove(out int chosenRow, out int chosenColumn);
+
+                if (playerContinues)
                 {
                     m_Game.MakeMoveAndUpdateResult(chosenRow, chosenColumn);
+                }
+                else
+                {
+                    m_Game.QuitCurrentGame();
                 }
             }
         }
