@@ -8,7 +8,7 @@ namespace Ex02
         {
             const bool v_IsCPU = true;
 
-            Player player1 = new Player("P1" ,ePlayerSymbol.X, !v_IsCPU);
+            Player player1 = new Player("P1", ePlayerSymbol.X, !v_IsCPU);
             Player player2 = new Player("P2", ePlayerSymbol.O, !v_IsCPU);
             int chosenBoardSize = 4;    
             int startingPlayerIndex = 0; 

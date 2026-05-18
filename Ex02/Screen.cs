@@ -19,8 +19,6 @@ namespace Ex02
 
                 while (m_Game.GameState == eGameState.InProgress)
                 {
-
-                    Console.WriteLine(boardString);
                     printCurrentGameState();
                     GetValidPlayerMove(out int chosenRow, out int chosenColumn);
 
@@ -51,7 +49,7 @@ namespace Ex02
             Console.WriteLine("Score: {0}-{1} | {2}-{3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
         }
 
-        public string[] UserInput()
+        public string[] GetUserInput()
         {
             Console.WriteLine("Player {0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
             Console.WriteLine("you can also press Q to quit");
@@ -62,8 +60,8 @@ namespace Ex02
 
         public bool ValidateUserInput(string i_LineChosenString, string i_ColumnChosenString)
         {
-            bool isLineValid = int.TryParse(i_LineChosenString, out int DummyPlaceHolder);
-            bool isColumnValid = int.TryParse(i_ColumnChosenString, out int DummyPlaceHolder2);
+            bool isLineValid = int.TryParse(i_LineChosenString, out int o_DummyPlaceHolder);
+            bool isColumnValid = int.TryParse(i_ColumnChosenString, out int o_DummyPlaceHolder2);
             return isLineValid && isColumnValid;
         }
 
@@ -74,7 +72,7 @@ namespace Ex02
             bool validInput = false;
             while (!validInput)
             {
-                string[] userCommand = UserInput();
+                string[] userCommand = GetUserInput();
 
                 if (userCommand.Length == 1 && userCommand[0].ToUpper() == "Q")
                 {
@@ -114,7 +112,7 @@ namespace Ex02
         {
             ConsoleUtils.Screen.Clear();
             printPlayersScore();
-            string boardString = m_Game.Board.BuildBoardString();
+            Console.WriteLine(m_Game.Board.BuildBoardString());
         }
     }
 }

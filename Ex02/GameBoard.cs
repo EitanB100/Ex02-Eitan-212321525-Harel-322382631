@@ -209,10 +209,10 @@
             return gameBoard;
         }
 
-        public string GameSymbolConverterToString(ePlayerSymbol i_playerSymbol)
+        public string GameSymbolConverterToString(ePlayerSymbol i_PlayerSymbol)
         {
             string symbolAsString = string.Empty;
-            switch (i_playerSymbol)
+            switch (i_PlayerSymbol)
             {
                 case ePlayerSymbol.None:
                     symbolAsString = " ";
