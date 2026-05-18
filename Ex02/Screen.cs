@@ -26,28 +26,9 @@ namespace Ex02
             }
         }
 
-        private void playRound()
-        {
-            while (m_Game.GameState == eGameState.InProgress)
-            {
-                printCurrentGameState();
-
-                bool playerContinues = getValidPlayerMove(out int chosenRow, out int chosenColumn);
-
-                if (playerContinues)
-                {
-                    m_Game.MakeMoveAndUpdateResult(chosenRow, chosenColumn);
-                }
-                else
-                {
-                    m_Game.QuitCurrentGame();
-                }
-            }
-        }
-
         private bool doesUserWantToContinue()
         {
-            printCurrentGameState();
+            PrintCurrentGameState();
             Console.WriteLine("Round over! press {0} to quit, or any other key to continue to the next round", k_QuitButton);
 
             string userInput = Console.ReadLine();
@@ -56,13 +37,6 @@ namespace Ex02
             return doesUserWantToContinue;
         }
 
-        private void printCurrentGameState()
-        {
-            ConsoleUtils.Screen.Clear();
-            printPlayersScore();
-            Console.WriteLine();
-            Console.WriteLine(m_Game.Board.BuildBoardString());
-        }
 
         private void printPlayersScore()
         {
@@ -87,7 +61,15 @@ namespace Ex02
             return isLineValid && isColumnValid;
         }
 
-        private bool getValidPlayerMove(out int o_Row, out int o_Column)
+        public void PrintCurrentGameState()
+        {
+            ConsoleUtils.Screen.Clear();
+            printPlayersScore();
+            Console.WriteLine();
+            Console.WriteLine(m_Game.Board.BuildBoardString());
+        }
+
+        public bool getValidPlayerMove(out int o_Row, out int o_Column)
         {
             o_Row = 0;
             o_Column = 0;

@@ -1,6 +1,6 @@
 ﻿namespace Ex02
 {
-    internal class GameManager
+    public class GameManager
     {
         public void Run()
         {
@@ -15,6 +15,25 @@
             Game game = new Game(settings.BoardSize, player1, player2, 0);
             Screen screen = new Screen(game);
             screen.GameRun();
+        }
+
+        private void playRound(Game i_Game, Screen i_Screen)
+        {
+            while (i_Game.GameState == eGameState.InProgress)
+            {
+                i_Screen.PrintCurrentGameState();
+
+                bool playerContinues = i_Screen.getValidPlayerMove(out int chosenRow, out int chosenColumn);
+
+                if (playerContinues)
+                {
+                    i_Game.MakeMoveAndUpdateResult(chosenRow, chosenColumn);
+                }
+                else
+                {
+                    i_Game.QuitCurrentGame();
+                }
+            }
         }
     }
 }
