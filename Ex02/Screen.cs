@@ -88,7 +88,15 @@ namespace Ex02
         public bool DoesUserWantToContinue()
         {
             PrintCurrentGameState();
-            Console.WriteLine("Round over! press {0} to quit, or any other key to continue to the next round", k_QuitButton);
+
+            if (m_Game.GameState == eGameState.Quit)
+            {
+                Console.WriteLine("{0} exited! press {1} again to close the program, or any other key to keep playing", m_Game.CurrentPlayer.Name, k_QuitButton);
+            }
+            else
+            {
+                Console.WriteLine("Round over! press {0} to quit, or any other key to continue to the next round", k_QuitButton);
+            }
 
             string userInput = Console.ReadLine();
             bool doesUserWantToContinue = (userInput.ToUpper() != k_QuitButton);

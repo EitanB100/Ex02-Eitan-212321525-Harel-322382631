@@ -83,6 +83,7 @@
         public void QuitCurrentGame()
         {
             m_GameState = eGameState.Quit;
+            m_Players[1 - m_CurrentPlayerIndex].AddPoint();
         }
 
         public bool EndOfSession()
