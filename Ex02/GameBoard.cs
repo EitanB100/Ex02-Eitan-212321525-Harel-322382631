@@ -59,12 +59,18 @@
 
         public bool IsValidCellForWriting(int i_RequestedRow, int i_RequestedColumn)
         {
-            bool isValidCoordinate = (i_RequestedColumn < BoardSize
-                && i_RequestedColumn >= 0
-                && i_RequestedRow < BoardSize
-                && i_RequestedRow >= 0
-                && IsCellEmpty(i_RequestedRow, i_RequestedColumn));
+            bool isValidCoordinate = (IsCellInsideLimit(i_RequestedRow, i_RequestedColumn)
+                                      && IsCellEmpty(i_RequestedRow, i_RequestedColumn));
 
+            return isValidCoordinate;
+        }
+
+        public bool IsCellInsideLimit(int i_RequestedRow, int i_RequestedColumn)
+        {
+            bool isValidCoordinate = (i_RequestedColumn < BoardSize
+                                     && i_RequestedColumn >= 0
+                                     && i_RequestedRow < BoardSize
+                                     && i_RequestedRow >= 0);
             return isValidCoordinate;
         }
 
@@ -247,5 +253,15 @@
             }
             return symbolAsString;
         }
+
+        public bool DiagonalCell(int i_Row, int i_Col)
+        {
+            if(i_Row == i_Col || i_Row== r_BoardSize - i_Col)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
