@@ -111,7 +111,7 @@ namespace Ex02
             return isLineValid && isColumnValid;
         }
 
-        private string BuildBoardString()
+        private string buildBoardString()
         {
             string gameBoard = "  ";
 
