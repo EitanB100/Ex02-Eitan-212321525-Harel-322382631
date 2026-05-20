@@ -93,7 +93,7 @@ namespace Ex02
 
             if (m_Game.GameState == eGameState.Quit)
             {
-                Console.WriteLine("{0} exited! press {1} again to close the program, or any other key to keep playing", m_Game.CurrentPlayer.Name, k_QuitButton);
+                Console.WriteLine("{0} quits! press {1} again to close the program, or any other key to keep playing", m_Game.CurrentPlayer.Name, k_QuitButton);
             }
             else if (m_Game.GameState == eGameState.Winner)
             {

@@ -5,6 +5,8 @@
         private GameBoard m_Board;
         private const int k_AmountOfPlayersInGame = 2;
         private Player[] m_Players = new Player[k_AmountOfPlayersInGame];
+        private readonly int r_StartingPlayerIndex;
+        private Player m_Winner;
         private int m_CurrentPlayerIndex;
         private eGameState m_GameState;
 
@@ -14,7 +16,9 @@
             m_Players[0] = i_Player1;
             m_Players[1] = i_Player2;
             m_CurrentPlayerIndex = i_StartingPlayerIndex;
+            r_StartingPlayerIndex = i_StartingPlayerIndex;
             m_GameState = eGameState.InProgress;
+            m_Winner = null;
         }
 
         //these are for UI interaction later on
@@ -30,7 +34,7 @@
         {
             get
             {
-                return (m_GameState == eGameState.Winner) ? m_Players[1 - m_CurrentPlayerIndex] : null;  
+                return m_Winner;
             }
         }
 
@@ -67,11 +71,13 @@
                 if (m_Board.CheckLosingCondition())
                 {
                     m_GameState = eGameState.Winner;
-                    m_Players[1 - m_CurrentPlayerIndex].AddPoint();
+                    m_Winner = m_Players[1 - m_CurrentPlayerIndex];
+                    m_Winner.AddPoint();
                 }
                 else if (m_Board.IsBoardFull())
                 {
                     m_GameState = eGameState.Draw;
+                    m_Winner = null;
                 }
                 else
                 {
@@ -85,13 +91,16 @@
         public void ResetBoard()
         {
             m_GameState = eGameState.InProgress;
+            m_Winner = null;
+            m_CurrentPlayerIndex = r_StartingPlayerIndex;
             m_Board = new GameBoard(m_Board.BoardSize);
         }
 
         public void QuitCurrentGame()
         {
             m_GameState = eGameState.Quit;
-            m_Players[1 - m_CurrentPlayerIndex].AddPoint();
+            m_Winner = m_Players[1 - m_CurrentPlayerIndex];
+            m_Winner.AddPoint();
         }
 
         private void switchTurn()
