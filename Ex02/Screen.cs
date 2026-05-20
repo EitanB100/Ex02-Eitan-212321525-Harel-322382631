@@ -41,7 +41,7 @@ namespace Ex02
             ConsoleUtils.Screen.Clear();
             printPlayersScore();
             Console.WriteLine();
-            Console.WriteLine(m_Game.Board.BuildBoardString());
+            Console.WriteLine(BuildBoardString());
         }
 
         public bool GetValidPlayerMove(out int o_Row, out int o_Column)
@@ -104,6 +104,60 @@ namespace Ex02
             bool doesUserWantToContinue = (userInput.ToUpper() != k_QuitButton);
 
             return doesUserWantToContinue;
+        }
+
+        private string BuildBoardString()
+        {
+            string gameBoard = "  ";
+            for (int numberToPrint = 1; numberToPrint <= m_Game.Board.BoardSize; numberToPrint++)
+            {
+                gameBoard += string.Format(" {0}  ", numberToPrint);
+            }
+            gameBoard += "\n";
+            for (int heightIndex = 0; heightIndex < m_Game.Board.BoardSize; heightIndex++)
+            {
+                for (int widthIndex = 0; widthIndex < m_Game.Board.BoardSize; widthIndex++)
+                {
+                    if (widthIndex == 0)
+                    {
+                        gameBoard += string.Format("{0}|", heightIndex + 1);
+                    }
+
+                    ePlayerSymbol tileSymbolOnSpot = m_Game.Board.GetCell(heightIndex, widthIndex);
+                    string tileToAddToBoard = GameSymbolConverterToString(tileSymbolOnSpot);
+                    gameBoard += string.Format(" {0} |", tileToAddToBoard);
+                }
+
+                gameBoard += "\n";
+                gameBoard += " =";
+
+                for (int amountOfEqualToCloseTable = 0; amountOfEqualToCloseTable < m_Game.Board.BoardSize; amountOfEqualToCloseTable++)
+                {
+                    gameBoard += "====";
+                }
+
+                gameBoard += "\n";
+            }
+
+            return gameBoard;
+        }
+
+        private string GameSymbolConverterToString(ePlayerSymbol i_PlayerSymbol)
+        {
+            string symbolAsString = string.Empty;
+            switch (i_PlayerSymbol)
+            {
+                case ePlayerSymbol.None:
+                    symbolAsString = " ";
+                    break;
+                case ePlayerSymbol.X:
+                    symbolAsString = "X";
+                    break;
+                case ePlayerSymbol.O:
+                    symbolAsString = "O";
+                    break;
+            }
+            return symbolAsString;
         }
     }
 }

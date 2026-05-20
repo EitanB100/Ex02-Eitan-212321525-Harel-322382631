@@ -91,7 +91,7 @@ namespace Ex02
             }
         }
 
-        public bool IsLosingMove(GameBoard i_Board, int i_Row, int i_Column, int i_BorderOfMiniBoard)
+        private bool IsLosingMove(GameBoard i_Board, int i_Row, int i_Column, int i_BorderOfMiniBoard)
         {
             GameBoard simulatedBoard = CopyGameBoardToSmallerOrSameSizeGameBoard(i_Board, i_BorderOfMiniBoard);
             simulatedBoard.PlaceSymbol(i_Row, i_Column, m_CpuInfo.Symbol);
@@ -99,7 +99,7 @@ namespace Ex02
             return simulatedBoard.CheckLosingCondition();
         }
 
-        public GameBoard CopyGameBoardToSmallerOrSameSizeGameBoard(GameBoard i_Board, int i_BorderOfMiniBoard)
+        private GameBoard CopyGameBoardToSmallerOrSameSizeGameBoard(GameBoard i_Board, int i_BorderOfMiniBoard)
         {
             GameBoard simulatedBoard = new GameBoard(i_BorderOfMiniBoard);
 
