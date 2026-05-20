@@ -36,7 +36,7 @@
 
         public static bool IsValidBoardSize(int i_Size)
         {
-            bool isValidBoardSize = (i_Size >= k_MinimumBoardSize 
+            bool isValidBoardSize = (i_Size >= k_MinimumBoardSize
                                     && i_Size <= k_MaximumBoardSize);
 
             return isValidBoardSize;
@@ -49,7 +49,7 @@
 
         public void PlaceSymbol(int i_Row, int i_Col, ePlayerSymbol i_Symbol)
         {
-            bool isRequestedCellValid = IsValidCellForWriting(i_Row, i_Col); 
+            bool isRequestedCellValid = IsValidCellForWriting(i_Row, i_Col);
 
             if (isRequestedCellValid)
             {
@@ -59,11 +59,18 @@
 
         public bool IsValidCellForWriting(int i_RequestedRow, int i_RequestedColumn)
         {
+            bool isValidCoordinate = (IsCellInsideLimit(i_RequestedRow, i_RequestedColumn)
+                                      && IsCellEmpty(i_RequestedRow, i_RequestedColumn));
+
+            return isValidCoordinate;
+        }
+
+        public bool IsCellInsideLimit(int i_RequestedRow, int i_RequestedColumn)
+        {
             bool isValidCoordinate = (i_RequestedColumn < BoardSize
-                && i_RequestedColumn >= 0
-                && i_RequestedRow < BoardSize
-                && i_RequestedRow >= 0
-                && IsCellEmpty(i_RequestedRow, i_RequestedColumn));
+                                     && i_RequestedColumn >= 0
+                                     && i_RequestedRow < BoardSize
+                                     && i_RequestedRow >= 0);
 
             return isValidCoordinate;
         }
@@ -103,6 +110,13 @@
                                     checkSecondaryDiagonalForLosingCondition());
 
             return isLosingConditionMet;
+        }
+
+        public bool DiagonalCell(int i_Row, int i_Col)
+        {
+            bool isDiagonalCell = (i_Row == i_Col) || (i_Row == r_BoardSize - i_Col - 1);
+
+            return isDiagonalCell;
         }
 
         private void fillBoardAtGameInit()
@@ -192,60 +206,6 @@
             }
 
             return isDiagonalLosing;
-        }
-
-        public string BuildBoardString()
-        {
-            string gameBoard = "  ";
-            for (int numberToPrint = 1; numberToPrint <= r_BoardSize; numberToPrint++)
-            {
-                gameBoard += string.Format(" {0}  ", numberToPrint);
-            }
-            gameBoard += "\n";
-            for (int heightIndex = 0; heightIndex < r_BoardSize; heightIndex++)
-            {
-                for (int widthIndex = 0; widthIndex < r_BoardSize; widthIndex++)
-                {
-                    if (widthIndex == 0)
-                    {
-                        gameBoard += string.Format("{0}|", heightIndex + 1);
-                    }
-
-                    ePlayerSymbol tileSymbolOnSpot = GetCell(heightIndex, widthIndex);
-                    string tileToAddToBoard = GameSymbolConverterToString(tileSymbolOnSpot);
-                    gameBoard += string.Format(" {0} |", tileToAddToBoard);
-                }
-
-                gameBoard += "\n";
-                gameBoard += " =";
-
-                for (int amountOfEqualToCloseTable = 0; amountOfEqualToCloseTable < r_BoardSize; amountOfEqualToCloseTable++)
-                {
-                    gameBoard += "====";
-                }
-
-                gameBoard += "\n";
-            }
-
-            return gameBoard;
-        }
-
-        public string GameSymbolConverterToString(ePlayerSymbol i_PlayerSymbol)
-        {
-            string symbolAsString = string.Empty;
-            switch (i_PlayerSymbol)
-            {
-                case ePlayerSymbol.None:
-                    symbolAsString = " ";
-                    break;
-                case ePlayerSymbol.X:
-                    symbolAsString = "X";
-                    break;
-                case ePlayerSymbol.O:
-                    symbolAsString = "O";
-                    break;
-            }
-            return symbolAsString;
         }
     }
 }

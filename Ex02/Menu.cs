@@ -99,8 +99,6 @@ namespace Ex02
             m_BoardSize = requestedSize;
         }
 
-
-
         private void printGameModeOptions()
         {
             Console.WriteLine("2 Players or Vs CPU?");

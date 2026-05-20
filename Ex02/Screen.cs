@@ -13,35 +13,12 @@ namespace Ex02
             m_Game = i_Game;
         }
 
-        private void printPlayersScore()
-        {
-            Console.WriteLine("Score: {0} - {1} | {2} - {3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
-        }
-
-        private string[] getUserInput()
-        {
-            Console.WriteLine("{0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
-            Console.WriteLine("you can also press {0} to quit the round", k_QuitButton);
-
-            string locationChoosenToPlaceOnBoard = Console.ReadLine();
-            string[] splitInput = locationChoosenToPlaceOnBoard.Split(',');
-
-            return splitInput;
-        }
-
-        private bool validateUserInput(string i_LineChosenString, string i_ColumnChosenString)
-        {
-            bool isLineValid = int.TryParse(i_LineChosenString, out int dummyPlaceHolder);
-            bool isColumnValid = int.TryParse(i_ColumnChosenString, out int dummyPlaceHolder2);
-            return isLineValid && isColumnValid;
-        }
-
         public void PrintCurrentGameState()
         {
             ConsoleUtils.Screen.Clear();
             printPlayersScore();
             Console.WriteLine();
-            Console.WriteLine(m_Game.Board.BuildBoardString());
+            Console.WriteLine(BuildBoardString());
         }
 
         public bool GetValidPlayerMove(out int o_Row, out int o_Column)
@@ -62,12 +39,10 @@ namespace Ex02
 
                 else if (userCommand.Length == 2 && validateUserInput(userCommand[0], userCommand[1]))
                 {
-                    o_Row = int.Parse(userCommand[0]) - 1; // tile number starts from 1 and array starts from 0
+                    o_Row = int.Parse(userCommand[0]) - 1;
                     o_Column = int.Parse(userCommand[1]) - 1;
 
-                    if (o_Row < 0 || o_Row >= m_Game.Board.BoardSize
-                                  || o_Column < 0
-                                  || o_Column >= m_Game.Board.BoardSize)
+                    if (!(m_Game.Board.IsCellInsideLimit(o_Row, o_Column)))
                     {
                         Console.WriteLine("Invalid input. Please enter values between 1 and {0}", m_Game.Board.BoardSize);
                     }
@@ -95,17 +70,105 @@ namespace Ex02
 
             if (m_Game.GameState == eGameState.Quit)
             {
-                Console.WriteLine("{0} exited! press {1} again to close the program, or any other key to keep playing", m_Game.CurrentPlayer.Name, k_QuitButton);
+                Console.WriteLine("{0} quits, {1} won! press {2} again to close the program, or any other key to keep playing", m_Game.CurrentPlayer.Name, m_Game.Winner.Name, k_QuitButton);
             }
-            else
+            else if (m_Game.GameState == eGameState.Winner)
             {
-                Console.WriteLine("Round over! press {0} to quit, or any other key to continue to the next round", k_QuitButton);
+                Console.WriteLine("{0} won! press {1} to quit, or any other key to keep playing", m_Game.Winner.Name, k_QuitButton);
+            }
+            else if (m_Game.GameState == eGameState.Draw)
+            {
+                Console.WriteLine("Draw! press {0} to quit, or any other key to keep playing", k_QuitButton);
             }
 
             string userInput = Console.ReadLine();
             bool doesUserWantToContinue = (userInput.ToUpper() != k_QuitButton);
 
             return doesUserWantToContinue;
+        }
+
+        private void printPlayersScore()
+        {
+            Console.WriteLine("Score: {0} - {1} | {2} - {3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
+        }
+
+        private string[] getUserInput()
+        {
+            Console.WriteLine("{0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
+            Console.WriteLine("you can also press {0} to quit the round", k_QuitButton);
+
+            string locationChoosenToPlaceOnBoard = Console.ReadLine();
+            string[] splitInput = locationChoosenToPlaceOnBoard.Split(',');
+
+            return splitInput;
+        }
+
+        private bool validateUserInput(string i_LineChosenString, string i_ColumnChosenString)
+        {
+            bool isLineValid = int.TryParse(i_LineChosenString, out int dummyPlaceHolder);
+            bool isColumnValid = int.TryParse(i_ColumnChosenString, out int dummyPlaceHolder2);
+
+            return isLineValid && isColumnValid;
+        }
+
+        private string BuildBoardString()
+        {
+            string gameBoard = "  ";
+
+            for (int numberToPrint = 1; numberToPrint <= m_Game.Board.BoardSize; numberToPrint++)
+            {
+                gameBoard += string.Format(" {0}  ", numberToPrint);
+            }
+
+            gameBoard += "\n";
+
+            for (int heightIndex = 0; heightIndex < m_Game.Board.BoardSize; heightIndex++)
+            {
+                for (int widthIndex = 0; widthIndex < m_Game.Board.BoardSize; widthIndex++)
+                {
+                    if (widthIndex == 0)
+                    {
+                        gameBoard += string.Format("{0}|", heightIndex + 1);
+                    }
+
+                    ePlayerSymbol tileSymbolOnSpot = m_Game.Board.GetCell(heightIndex, widthIndex);
+                    string tileToAddToBoard = GameSymbolConverterToString(tileSymbolOnSpot);
+
+                    gameBoard += string.Format(" {0} |", tileToAddToBoard);
+                }
+
+                gameBoard += "\n";
+                gameBoard += " =";
+
+                for (int amountOfEqualToCloseTable = 0; amountOfEqualToCloseTable < m_Game.Board.BoardSize; amountOfEqualToCloseTable++)
+                {
+                    gameBoard += "====";
+                }
+
+                gameBoard += "\n";
+            }
+
+            return gameBoard;
+        }
+
+        private string GameSymbolConverterToString(ePlayerSymbol i_PlayerSymbol)
+        {
+            string symbolAsString = string.Empty;
+
+            switch (i_PlayerSymbol)
+            {
+                case ePlayerSymbol.None:
+                    symbolAsString = " ";
+                    break;
+                case ePlayerSymbol.X:
+                    symbolAsString = "X";
+                    break;
+                case ePlayerSymbol.O:
+                    symbolAsString = "O";
+                    break;
+            }
+
+            return symbolAsString;
         }
     }
 }
