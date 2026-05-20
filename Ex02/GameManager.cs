@@ -68,6 +68,11 @@
 
                 playAgain = i_Screen.DoesUserWantToContinue();
             }
+
+            if (!playAgain)
+            {
+                System.Console.WriteLine("Thanks for playing!");
+            }
         }
     }
 }
