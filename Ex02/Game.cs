@@ -26,6 +26,14 @@
             }
         }
 
+        public Player Winner
+        {
+            get
+            {
+                return (m_GameState == eGameState.Winner) ? m_Players[1 - m_CurrentPlayerIndex] : null;  
+            }
+        }
+
         public GameBoard Board
         {
             get

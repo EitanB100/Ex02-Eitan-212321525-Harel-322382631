@@ -95,9 +95,13 @@ namespace Ex02
             {
                 Console.WriteLine("{0} exited! press {1} again to close the program, or any other key to keep playing", m_Game.CurrentPlayer.Name, k_QuitButton);
             }
-            else
+            else if (m_Game.GameState == eGameState.Winner)
             {
-                Console.WriteLine("Round over! press {0} to quit, or any other key to continue to the next round", k_QuitButton);
+                Console.WriteLine("{0} won! press {1} to quit, or any other key to keep playing", m_Game.Winner.Name, k_QuitButton);
+            }
+            else if (m_Game.GameState == eGameState.Draw)
+            {
+                Console.WriteLine("Draw! press {0} to quit, or any other key to keep playing", k_QuitButton);
             }
 
             string userInput = Console.ReadLine();
