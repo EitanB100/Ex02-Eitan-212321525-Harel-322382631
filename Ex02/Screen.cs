@@ -132,7 +132,7 @@ namespace Ex02
                     }
 
                     ePlayerSymbol tileSymbolOnSpot = m_Game.Board.GetCell(heightIndex, widthIndex);
-                    string tileToAddToBoard = GameSymbolConverterToString(tileSymbolOnSpot);
+                    string tileToAddToBoard = gameSymbolConverterToString(tileSymbolOnSpot);
 
                     gameBoard += string.Format(" {0} |", tileToAddToBoard);
                 }
@@ -151,7 +151,7 @@ namespace Ex02
             return gameBoard;
         }
 
-        private string GameSymbolConverterToString(ePlayerSymbol i_PlayerSymbol)
+        private string gameSymbolConverterToString(ePlayerSymbol i_PlayerSymbol)
         {
             string symbolAsString = string.Empty;
 

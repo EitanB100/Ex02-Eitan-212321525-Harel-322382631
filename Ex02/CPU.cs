@@ -46,7 +46,7 @@ namespace Ex02
                             continue;
                         }
 
-                        if (IsLosingMove(i_Board, i, j, searchSize))
+                        if (isLosingMove(i_Board, i, j, searchSize))
                         {
                             badMovesForCpu.Add((i, j));
                             continue;
@@ -91,15 +91,15 @@ namespace Ex02
             }
         }
 
-        private bool IsLosingMove(GameBoard i_Board, int i_Row, int i_Column, int i_BorderOfMiniBoard)
+        private bool isLosingMove(GameBoard i_Board, int i_Row, int i_Column, int i_BorderOfMiniBoard)
         {
-            GameBoard simulatedBoard = CopyGameBoardToSmallerOrSameSizeGameBoard(i_Board, i_BorderOfMiniBoard);
+            GameBoard simulatedBoard = copyGameBoardToSmallerOrSameSizeGameBoard(i_Board, i_BorderOfMiniBoard);
             simulatedBoard.PlaceSymbol(i_Row, i_Column, m_CpuInfo.Symbol);
 
             return simulatedBoard.CheckLosingCondition();
         }
 
-        private GameBoard CopyGameBoardToSmallerOrSameSizeGameBoard(GameBoard i_Board, int i_BorderOfMiniBoard)
+        private GameBoard copyGameBoardToSmallerOrSameSizeGameBoard(GameBoard i_Board, int i_BorderOfMiniBoard)
         {
             GameBoard simulatedBoard = new GameBoard(i_BorderOfMiniBoard);
 
