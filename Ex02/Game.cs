@@ -21,7 +21,6 @@
             m_Winner = null;
         }
 
-        //these are for UI interaction later on
         public Player CurrentPlayer
         {
             get

@@ -46,7 +46,7 @@ namespace Ex02
 
                         if (m_CpuGamePosition.Board.DiagonalCell(i, j))
                         {
-                            diagonalCellsToPickFrom.Add((i, j)); // tile number starts from 1 and array starts from 0
+                            diagonalCellsToPickFrom.Add((i, j));
                         }
                         else
                         {
