@@ -68,21 +68,21 @@ namespace Ex02
                     randomIndex = m_CellPicker.Next(nonDiagonalCellsToPickFrom.Count);
                     (o_Row, o_Column) = nonDiagonalCellsToPickFrom[randomIndex];
 
-                    return;
+                    break;
                 }
                 else if (diagonalCellsToPickFrom.Count > 0)
                 {
                     randomIndex = m_CellPicker.Next(diagonalCellsToPickFrom.Count);
                     (o_Row, o_Column) = diagonalCellsToPickFrom[randomIndex];
 
-                    return;
+                    break;
                 }
                 else if (searchSize == i_Board.BoardSize && badMovesForCpu.Count > 0)
                 {
                     randomIndex = m_CellPicker.Next(badMovesForCpu.Count);
                     (o_Row, o_Column) = badMovesForCpu[randomIndex];
 
-                    return;
+                    break;
                 }
                 else
                 {

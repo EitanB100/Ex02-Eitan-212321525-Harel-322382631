@@ -18,7 +18,7 @@ namespace Ex02
             ConsoleUtils.Screen.Clear();
             printPlayersScore();
             Console.WriteLine();
-            Console.WriteLine(BuildBoardString());
+            Console.WriteLine(buildBoardString());
         }
 
         public bool GetValidPlayerMove(out int o_Row, out int o_Column)
