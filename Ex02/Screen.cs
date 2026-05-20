@@ -36,7 +36,6 @@ namespace Ex02
                 {
                     playerQuit = true;
                 }
-
                 else if (userCommand.Length == 2 && validateUserInput(userCommand[0], userCommand[1]))
                 {
                     o_Row = int.Parse(userCommand[0]) - 1;
@@ -103,9 +102,9 @@ namespace Ex02
             return splitInput;
         }
 
-        private bool validateUserInput(string i_LineChosenString, string i_ColumnChosenString)
+        private bool validateUserInput(string i_RowChosenString, string i_ColumnChosenString)
         {
-            bool isLineValid = int.TryParse(i_LineChosenString, out int dummyPlaceHolder);
+            bool isLineValid = int.TryParse(i_RowChosenString, out int dummyPlaceHolder);
             bool isColumnValid = int.TryParse(i_ColumnChosenString, out int dummyPlaceHolder2);
 
             return isLineValid && isColumnValid;

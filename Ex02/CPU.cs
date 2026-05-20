@@ -16,14 +16,6 @@ namespace Ex02
             m_CellPicker = new Random();
         }
 
-        public Player PlayerInfo
-        {
-            get
-            {
-                return m_CpuInfo;
-            }
-        }
-
         public void GetMove(GameBoard i_Board, out int o_Row, out int o_Column)
         {
             o_Row = 0;
