@@ -6,7 +6,7 @@
         private const int k_AmountOfPlayersInGame = 2;
         private Player[] m_Players = new Player[k_AmountOfPlayersInGame];
         private Player m_Winner;
-        private int m_PlayerStartedTheGame;
+        private int m_PlayerStartedTheGameIndex;
         private int m_CurrentPlayerIndex;
         private eGameState m_GameState;
 
@@ -15,7 +15,7 @@
             m_Board = new GameBoard(i_BoardSize);
             m_Players[0] = i_Player1;
             m_Players[1] = i_Player2;
-            m_PlayerStartedTheGame = i_StartingPlayerIndex;
+            m_PlayerStartedTheGameIndex = i_StartingPlayerIndex;
             m_CurrentPlayerIndex = i_StartingPlayerIndex;
             m_GameState = eGameState.InProgress;
             m_Winner = null;
@@ -92,7 +92,7 @@
         {
             m_GameState = eGameState.InProgress;
             m_Winner = null;
-            m_PlayerStartedTheGame = 1 - m_PlayerStartedTheGame;
+            m_PlayerStartedTheGameIndex = 1 - m_PlayerStartedTheGameIndex;
             m_Board = new GameBoard(m_Board.BoardSize);
         }
 
