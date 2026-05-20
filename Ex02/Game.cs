@@ -5,8 +5,8 @@
         private GameBoard m_Board;
         private const int k_AmountOfPlayersInGame = 2;
         private Player[] m_Players = new Player[k_AmountOfPlayersInGame];
-        private readonly int r_StartingPlayerIndex;
         private Player m_Winner;
+        private int m_PlayerStartedTheGame;
         private int m_CurrentPlayerIndex;
         private eGameState m_GameState;
 
@@ -15,8 +15,8 @@
             m_Board = new GameBoard(i_BoardSize);
             m_Players[0] = i_Player1;
             m_Players[1] = i_Player2;
+            m_PlayerStartedTheGame = i_StartingPlayerIndex;
             m_CurrentPlayerIndex = i_StartingPlayerIndex;
-            r_StartingPlayerIndex = i_StartingPlayerIndex;
             m_GameState = eGameState.InProgress;
             m_Winner = null;
         }
@@ -64,7 +64,7 @@
 
         public eGameState MakeMoveAndUpdateResult(int i_RequestedRow, int i_RequestedColumn)
         {
-            if (m_Board.IsValidCellForWriting(i_RequestedRow, i_RequestedColumn)) 
+            if (m_Board.IsValidCellForWriting(i_RequestedRow, i_RequestedColumn))
             {
                 m_Board.PlaceSymbol(i_RequestedRow, i_RequestedColumn, m_Players[m_CurrentPlayerIndex].Symbol);
 
@@ -92,7 +92,7 @@
         {
             m_GameState = eGameState.InProgress;
             m_Winner = null;
-            m_CurrentPlayerIndex = r_StartingPlayerIndex;
+            m_PlayerStartedTheGame = 1 - m_PlayerStartedTheGame;
             m_Board = new GameBoard(m_Board.BoardSize);
         }
 
