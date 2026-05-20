@@ -7,7 +7,7 @@ namespace Ex02
     {
         private Player m_CpuInfo;
         private Game m_CpuGamePosition;
-        private Random m_CellPicker = new Random();
+        private Random m_CellPicker;
 
         public CPU(Player i_PlayerInfo, Game i_GamePositionRightNow)
         {

@@ -13,28 +13,7 @@ namespace Ex02
             m_Game = i_Game;
         }
 
-        private void printPlayersScore()
-        {
-            Console.WriteLine("Score: {0} - {1} | {2} - {3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
-        }
 
-        private string[] getUserInput()
-        {
-            Console.WriteLine("{0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
-            Console.WriteLine("you can also press {0} to quit the round", k_QuitButton);
-
-            string locationChoosenToPlaceOnBoard = Console.ReadLine();
-            string[] splitInput = locationChoosenToPlaceOnBoard.Split(',');
-
-            return splitInput;
-        }
-
-        private bool validateUserInput(string i_LineChosenString, string i_ColumnChosenString)
-        {
-            bool isLineValid = int.TryParse(i_LineChosenString, out int dummyPlaceHolder);
-            bool isColumnValid = int.TryParse(i_ColumnChosenString, out int dummyPlaceHolder2);
-            return isLineValid && isColumnValid;
-        }
 
         public void PrintCurrentGameState()
         {
@@ -62,7 +41,7 @@ namespace Ex02
 
                 else if (userCommand.Length == 2 && validateUserInput(userCommand[0], userCommand[1]))
                 {
-                    o_Row = int.Parse(userCommand[0]) - 1; // tile number starts from 1 and array starts from 0
+                    o_Row = int.Parse(userCommand[0]) - 1;
                     o_Column = int.Parse(userCommand[1]) - 1;
 
                     if (!(m_Game.Board.IsCellInsideLimit(o_Row, o_Column)))
@@ -93,7 +72,7 @@ namespace Ex02
 
             if (m_Game.GameState == eGameState.Quit)
             {
-                Console.WriteLine("{0} quits! press {1} again to close the program, or any other key to keep playing", m_Game.CurrentPlayer.Name, k_QuitButton);
+                Console.WriteLine("{0} quits, {1} won! press {2} again to close the program, or any other key to keep playing", m_Game.CurrentPlayer.Name, m_Game.Winner, k_QuitButton);
             }
             else if (m_Game.GameState == eGameState.Winner)
             {
@@ -110,14 +89,41 @@ namespace Ex02
             return doesUserWantToContinue;
         }
 
+        private void printPlayersScore()
+        {
+            Console.WriteLine("Score: {0} - {1} | {2} - {3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
+        }
+
+        private string[] getUserInput()
+        {
+            Console.WriteLine("{0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
+            Console.WriteLine("you can also press {0} to quit the round", k_QuitButton);
+
+            string locationChoosenToPlaceOnBoard = Console.ReadLine();
+            string[] splitInput = locationChoosenToPlaceOnBoard.Split(',');
+
+            return splitInput;
+        }
+
+        private bool validateUserInput(string i_LineChosenString, string i_ColumnChosenString)
+        {
+            bool isLineValid = int.TryParse(i_LineChosenString, out int dummyPlaceHolder);
+            bool isColumnValid = int.TryParse(i_ColumnChosenString, out int dummyPlaceHolder2);
+
+            return isLineValid && isColumnValid;
+        }
+
         private string BuildBoardString()
         {
-            string gameBoard = "  ";
+            string gameBoard = string.Empty;
+
             for (int numberToPrint = 1; numberToPrint <= m_Game.Board.BoardSize; numberToPrint++)
             {
                 gameBoard += string.Format(" {0}  ", numberToPrint);
             }
+
             gameBoard += "\n";
+
             for (int heightIndex = 0; heightIndex < m_Game.Board.BoardSize; heightIndex++)
             {
                 for (int widthIndex = 0; widthIndex < m_Game.Board.BoardSize; widthIndex++)
@@ -129,6 +135,7 @@ namespace Ex02
 
                     ePlayerSymbol tileSymbolOnSpot = m_Game.Board.GetCell(heightIndex, widthIndex);
                     string tileToAddToBoard = GameSymbolConverterToString(tileSymbolOnSpot);
+
                     gameBoard += string.Format(" {0} |", tileToAddToBoard);
                 }
 
@@ -149,6 +156,7 @@ namespace Ex02
         private string GameSymbolConverterToString(ePlayerSymbol i_PlayerSymbol)
         {
             string symbolAsString = string.Empty;
+
             switch (i_PlayerSymbol)
             {
                 case ePlayerSymbol.None:
@@ -161,6 +169,7 @@ namespace Ex02
                     symbolAsString = "O";
                     break;
             }
+
             return symbolAsString;
         }
     }

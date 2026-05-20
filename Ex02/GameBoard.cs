@@ -36,7 +36,7 @@
 
         public static bool IsValidBoardSize(int i_Size)
         {
-            bool isValidBoardSize = (i_Size >= k_MinimumBoardSize 
+            bool isValidBoardSize = (i_Size >= k_MinimumBoardSize
                                     && i_Size <= k_MaximumBoardSize);
 
             return isValidBoardSize;
@@ -49,7 +49,7 @@
 
         public void PlaceSymbol(int i_Row, int i_Col, ePlayerSymbol i_Symbol)
         {
-            bool isRequestedCellValid = IsValidCellForWriting(i_Row, i_Col); 
+            bool isRequestedCellValid = IsValidCellForWriting(i_Row, i_Col);
 
             if (isRequestedCellValid)
             {
@@ -109,6 +109,13 @@
                                     checkSecondaryDiagonalForLosingCondition());
 
             return isLosingConditionMet;
+        }
+
+        public bool DiagonalCell(int i_Row, int i_Col)
+        {
+            bool isDiagonalCell = (i_Row == i_Col) || (i_Row == r_BoardSize - i_Col - 1);
+
+            return isDiagonalCell;
         }
 
         private void fillBoardAtGameInit()
@@ -199,15 +206,5 @@
 
             return isDiagonalLosing;
         }
-
-        
-
-        public bool DiagonalCell(int i_Row, int i_Col)
-        {
-            bool isDiagonalCell = (i_Row == i_Col) || (i_Row == r_BoardSize - i_Col - 1);
-
-            return isDiagonalCell;
-        }
-
     }
 }

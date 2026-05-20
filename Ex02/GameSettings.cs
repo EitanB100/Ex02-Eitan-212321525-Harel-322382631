@@ -7,7 +7,6 @@
         private readonly string r_Player2Name;
         private readonly int r_BoardSize;
 
-
         public GameSettings(eGameMode i_GameMode, string i_Player1Name, string i_Player2Name, int i_BoardSize)
         {
             r_GameMode = i_GameMode;

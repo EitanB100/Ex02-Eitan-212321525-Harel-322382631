@@ -15,9 +15,7 @@
             Game game = new Game(settings.BoardSize, player1, player2, 0);
             Screen screen = new Screen(game);
 
-            CPU cpu = isPlayer2CPU ? new CPU(player2 , game) : null;
-
-
+            CPU cpu = isPlayer2CPU ? new CPU(player2, game) : null;
 
             runGameSession(game, screen, cpu);
         }
