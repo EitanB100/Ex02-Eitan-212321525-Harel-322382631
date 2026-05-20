@@ -13,7 +13,6 @@
             r_Player1Name = i_Player1Name;
             r_Player2Name = i_Player2Name;
             r_BoardSize = i_BoardSize;
-
         }
 
         public eGameMode GameMode

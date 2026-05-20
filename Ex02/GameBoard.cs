@@ -71,6 +71,7 @@
                                      && i_RequestedColumn >= 0
                                      && i_RequestedRow < BoardSize
                                      && i_RequestedRow >= 0);
+
             return isValidCoordinate;
         }
 

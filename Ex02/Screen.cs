@@ -13,8 +13,6 @@ namespace Ex02
             m_Game = i_Game;
         }
 
-
-
         public void PrintCurrentGameState()
         {
             ConsoleUtils.Screen.Clear();
@@ -72,7 +70,7 @@ namespace Ex02
 
             if (m_Game.GameState == eGameState.Quit)
             {
-                Console.WriteLine("{0} quits, {1} won! press {2} again to close the program, or any other key to keep playing", m_Game.CurrentPlayer.Name, m_Game.Winner, k_QuitButton);
+                Console.WriteLine("{0} quits, {1} won! press {2} again to close the program, or any other key to keep playing", m_Game.CurrentPlayer.Name, m_Game.Winner.Name, k_QuitButton);
             }
             else if (m_Game.GameState == eGameState.Winner)
             {
@@ -115,7 +113,7 @@ namespace Ex02
 
         private string BuildBoardString()
         {
-            string gameBoard = string.Empty;
+            string gameBoard = "  ";
 
             for (int numberToPrint = 1; numberToPrint <= m_Game.Board.BoardSize; numberToPrint++)
             {
