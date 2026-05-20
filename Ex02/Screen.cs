@@ -89,7 +89,7 @@ namespace Ex02
 
         private void printPlayersScore()
         {
-            Console.WriteLine("Score: {0} - {1} | {2} - {3} ", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
+            Console.WriteLine("Score: {0} - {1} | {2} - {3}", m_Game.Players[0].Name, m_Game.Players[0].Score, m_Game.Players[1].Name, m_Game.Players[1].Score);
         }
 
         private string[] getUserInput()
@@ -97,8 +97,8 @@ namespace Ex02
             Console.WriteLine("{0}'s turn. Please enter your move (row and column) like this: 1,2", m_Game.CurrentPlayer.Name);
             Console.WriteLine("you can also press {0} to quit the round", k_QuitButton);
 
-            string locationChoosenToPlaceOnBoard = Console.ReadLine();
-            string[] splitInput = locationChoosenToPlaceOnBoard.Split(',');
+            string locationChosenToPlaceOnBoard = Console.ReadLine();
+            string[] splitInput = locationChosenToPlaceOnBoard.Split(',');
 
             return splitInput;
         }
